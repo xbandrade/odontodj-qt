@@ -1,14 +1,18 @@
-from PyQt5.QtWidgets import QApplication, QWidget
+from PyQt5.QtWidgets import QApplication, QStackedWidget
 
-from gui.loginUI import Ui_Form as UI
+from loginUI import LoginUI as UI
+from window import CustomMainWindow
 
 
 def main():
     app = QApplication([])
-    window = QWidget()
-    ui = UI()
-    ui.setupUi(window)
-    window.show()
+    main_window = CustomMainWindow()
+    main_window.setGeometry(100, 100, 800, 600)
+    stacked_widget = QStackedWidget(main_window)
+    login_ui = UI(main_window)
+    stacked_widget.addWidget(login_ui)
+    main_window.setCentralWidget(stacked_widget)
+    main_window.show()
     app.exec_()
 
 
