@@ -1,11 +1,13 @@
-from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QApplication, QWidget
 
-from window import LoginWindow
+from gui.loginUI import Ui_Form as UI
 
 
 def main():
     app = QApplication([])
-    window = LoginWindow(1200, 800)
+    window = QWidget()
+    ui = UI()
+    ui.setupUi(window)
     window.show()
     app.exec_()
 
