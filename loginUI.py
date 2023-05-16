@@ -1,12 +1,13 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-import gui.res  # noqa
+import gui.login.res  # noqa
 
 
 class LoginUI(QtWidgets.QWidget):
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, stacked=None):
         super().__init__(parent)
         self.window = parent
+        self.stacked = stacked
         self.setupUi(parent)
 
     def setupUi(self, Form):
@@ -27,7 +28,7 @@ class LoginUI(QtWidgets.QWidget):
         self.label_2.setObjectName('label_2')
         self.label_3 = QtWidgets.QLabel(self.widget)
         self.label_3.setGeometry(QtCore.QRect(340, 60, 351, 91))
-        self.label_3.setStyleSheet("border-image: url(:/images/od.png);")
+        self.label_3.setStyleSheet("border-image: url(:/img/images/od.png);")
         self.label_3.setText('')
         self.label_3.setObjectName('label_3')
         self.label_4 = QtWidgets.QLabel(self.widget)
@@ -125,7 +126,7 @@ class LoginUI(QtWidgets.QWidget):
         self.label_6.setGeometry(QtCore.QRect(30, 30, 991, 631))
         self.label_6.setStyleSheet(
             "border-radius: 20px;\n"
-            "border-image: url(:/images/bg.png);\n"
+            "border-image: url(:/img/images/bg.png);\n"
             "background-color: rgba(0, 0, 0, 120);"
         )
         self.label_6.setText("")
@@ -138,7 +139,7 @@ class LoginUI(QtWidgets.QWidget):
             "QPushButton#closeButton {\n"
             "    background-color: transparent;\n"
             "    border: none;\n"
-            "    image: url(:/images/x.png);\n"
+            "    image: url(:/img/images/x.png);\n"
             "}"
         )
         self.closeButton.setText('')
@@ -152,7 +153,7 @@ class LoginUI(QtWidgets.QWidget):
             "QPushButton#minimizeButton {\n"
             "    background-color: transparent;\n"
             "    border: none;\n"
-            "    image: url(:/images/min.png);\n"
+            "    image: url(:/img/images/min.png);\n"
             "}"
         )
         self.minimizeButton.setText('')
@@ -197,6 +198,7 @@ class LoginUI(QtWidgets.QWidget):
         us, ps = 'baxx', 'test123'
         if username == us and password == ps:
             print('Login Successful!')
+            self.stacked.setCurrentIndex(0)
         else:
             print('Incorrect username or password')
 

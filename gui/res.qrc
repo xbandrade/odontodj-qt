@@ -1,8 +1,0 @@
-<RCC>
-  <qresource prefix="images">
-    <file>min.png</file>
-    <file>od.png</file>
-    <file>bg.png</file>
-    <file>x.png</file>
-  </qresource>
-</RCC>
