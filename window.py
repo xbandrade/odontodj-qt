@@ -1,5 +1,6 @@
+from PyQt5 import QtCore
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QMouseEvent
+from PyQt5.QtGui import QIcon, QMouseEvent
 from PyQt5.QtWidgets import QMainWindow
 
 
@@ -9,6 +10,12 @@ class CustomMainWindow(QMainWindow):
         self.draggable = True
         self.mousePressPos = None
         self.mouseMovePos = None
+        self.setObjectName('OdontoDj')
+        self.resize(1118, 750)
+        self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
+        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+        icon = QIcon('img/od_logo.png')
+        self.setWindowIcon(icon)
 
     def mousePressEvent(self, event: QMouseEvent):
         if event.button() == Qt.LeftButton and self.draggable:
@@ -30,3 +37,8 @@ class CustomMainWindow(QMainWindow):
             self.mousePressPos = None
             self.mouseMovePos = None
         super().mouseReleaseEvent(event)
+
+    def switch_to_framed(self):
+        self.setWindowFlags(QtCore.Qt.Widget)
+        self.setAttribute(QtCore.Qt.WA_TranslucentBackground, False)
+        self.show()

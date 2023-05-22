@@ -1,21 +1,17 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 import gui.login.res  # noqa
+from mainUI import MainUI
 
 
 class LoginUI(QtWidgets.QWidget):
-    def __init__(self, parent=None, stacked=None):
+    def __init__(self, parent=None):
         super().__init__(parent)
         self.window = parent
-        self.stacked = stacked
-        self.setupUi(parent)
+        self.setupUi()
 
-    def setupUi(self, Form):
-        Form.setObjectName('Form')
-        Form.resize(1118, 750)
-        Form.setWindowFlags(QtCore.Qt.FramelessWindowHint)
-        Form.setAttribute(QtCore.Qt.WA_TranslucentBackground)
-        self.widget = QtWidgets.QWidget(Form)
+    def setupUi(self):
+        self.widget = QtWidgets.QWidget(self.window)
         self.widget.setGeometry(QtCore.QRect(30, 30, 1051, 691))
         self.widget.setObjectName('widget')
         self.label_2 = QtWidgets.QLabel(self.widget)
@@ -174,8 +170,8 @@ class LoginUI(QtWidgets.QWidget):
                 color=QtGui.QColor(105, 118, 132, 100)
             )
         )
-        self.retranslateUi(Form)
-        QtCore.QMetaObject.connectSlotsByName(Form)
+        self.retranslateUi()
+        QtCore.QMetaObject.connectSlotsByName(self.window)
         self.closeButton.clicked.connect(self.on_close_app)
         self.minimizeButton.clicked.connect(self.on_minimize_window)
         self.login_button.clicked.connect(self.on_login_clicked)
@@ -195,16 +191,18 @@ class LoginUI(QtWidgets.QWidget):
             self.login_user(username, password)
 
     def login_user(self, username, password):
-        us, ps = 'baxx', 'test123'
-        if username == us and password == ps:
+        us, ps = 'baxx', 't123'
+        if (username, password) == (us, ps):
             print('Login Successful!')
-            self.stacked.setCurrentIndex(0)
+            main_ui = MainUI(self.window, username)
+            self.window.centralWidget().deleteLater()
+            self.window.setCentralWidget(main_ui.widget)
         else:
             print('Incorrect username or password')
 
-    def retranslateUi(self, Form):
+    def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        self.window.setWindowTitle(_translate("Form", "OdontoDj"))
         self.label_4.setText(_translate("Form", "Login"))
         self.user_line_edit.setPlaceholderText(
             _translate("Form", "Username")
