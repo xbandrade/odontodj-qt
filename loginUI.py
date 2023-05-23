@@ -1,8 +1,8 @@
-import requests
+import requests  # noqa
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 import gui.login.res  # noqa
-from mainUI import MainUI
+from navigator import navigate_to_main_app
 
 
 class LoginUI(QtWidgets.QWidget):
@@ -196,9 +196,7 @@ class LoginUI(QtWidgets.QWidget):
         us, ps = 'baxx', 't123'
         if (username, password) == (us, ps):
             print('Login Successful!')
-            main_ui = MainUI(self.window, username)
-            self.window.centralWidget().deleteLater()
-            self.window.setCentralWidget(main_ui.widget)
+            navigate_to_main_app(self.window, username)
         else:
             print('Incorrect username or password')
 

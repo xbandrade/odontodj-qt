@@ -2,6 +2,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 import gui.main.res  # noqa
 from historyUI import HistoryUI
+from navigator import navigate_to_login_page
 from window import CustomNewWindow
 
 
@@ -268,6 +269,10 @@ class MainUI(QtWidgets.QWidget):
         self.retranslateUi()
         QtCore.QMetaObject.connectSlotsByName(self.window)
         self.patient_history_button.clicked.connect(self.on_history_click)
+        self.logoutButton.clicked.connect(self.on_logout)
+
+    def on_logout(self):
+        navigate_to_login_page(self.window)
 
     def on_history_click(self):
         self.new_window = CustomNewWindow()
