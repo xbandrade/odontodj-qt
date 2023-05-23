@@ -12,8 +12,6 @@ class CustomMainWindow(QMainWindow):
         self.mouseMovePos = None
         self.setObjectName('OdontoDj')
         self.resize(1118, 750)
-        self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
-        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         icon = QIcon('img/od_logo.png')
         self.setWindowIcon(icon)
 
@@ -42,3 +40,13 @@ class CustomMainWindow(QMainWindow):
         self.setWindowFlags(QtCore.Qt.Widget)
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground, False)
         self.show()
+
+    def switch_to_frameless(self):
+        self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
+        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+        self.show()
+
+
+class CustomNewWindow(CustomMainWindow):
+    def __init__(self, parent=None):
+        super().__init__(parent)

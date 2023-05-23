@@ -1,3 +1,4 @@
+import requests
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 import gui.login.res  # noqa
@@ -11,6 +12,7 @@ class LoginUI(QtWidgets.QWidget):
         self.setupUi()
 
     def setupUi(self):
+        self.window.switch_to_frameless()
         self.widget = QtWidgets.QWidget(self.window)
         self.widget.setGeometry(QtCore.QRect(30, 30, 1051, 691))
         self.widget.setObjectName('widget')

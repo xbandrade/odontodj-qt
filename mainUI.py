@@ -1,6 +1,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 import gui.main.res  # noqa
+from historyUI import HistoryUI
+from window import CustomNewWindow
 
 
 class MainUI(QtWidgets.QWidget):
@@ -72,43 +74,47 @@ class MainUI(QtWidgets.QWidget):
             "}\n"
             ""
         )
+        button_style = """
+            {\nborder-image: none;\n
+            background-color: qlineargradient(spread:pad,x1:0,
+            y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20, 47, 78, 219),
+            stop:1 rgba(85, 98, 112, 226));\n
+            color: rgba(255, 255, 255, 210);\n
+            border-radius: 5px;\n}\n
+        """
+        hover_style = """
+            {\nbackground-color: qlineargradient(spread:pad,x1:0,
+            y1:0.505682, x2:1, y2:0.477, stop:0 rgba(40, 67, 98, 219),
+            stop:1 rgba(105, 118, 132, 226));\n}\n
+        """
+        pressed_style = """
+            {\npadding-left:5px;\n
+            padding-top:5px;\n
+            background-color: rgba(105, 118, 132, 200);\n}\n
+        """
         self.logoutButton.setObjectName('logoutButton')
         self.calendarWidget = QtWidgets.QCalendarWidget(self.widget_2)
         self.calendarWidget.setGeometry(QtCore.QRect(470, 130, 631, 601))
-        self.calendarWidget.setStyleSheet("border-image: none;")
+        self.calendarWidget.setStyleSheet(
+            "border-image: none;"
+        )
         self.calendarWidget.setObjectName('calendarWidget')
-        self.scheduleButton = QtWidgets.QPushButton(self.widget_2)
-        self.scheduleButton.setGeometry(QtCore.QRect(10, 150, 211, 101))
+        self.schedule_button = QtWidgets.QPushButton(self.widget_2)
+        self.schedule_button.setGeometry(QtCore.QRect(10, 150, 211, 101))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
         font.setWeight(75)
-        self.scheduleButton.setFont(font)
-        self.scheduleButton.setCursor(
+        self.schedule_button.setFont(font)
+        self.schedule_button.setCursor(
             QtGui.QCursor(QtCore.Qt.PointingHandCursor)
         )
-        self.scheduleButton.setStyleSheet(
-            "QPushButton#scheduleButton{\n"
-            "    border-image: none;\n"
-            "    background-color: qlineargradient(spread:pad,x1:0,"
-            " y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20, 47, 78, 219),"
-            " stop:1 rgba(85, 98, 112, 226));\n"
-            "    color: rgba(255, 255, 255, 210);\n"
-            "    border-radius: 5px;    \n"
-            "}\n"
-            "QPushButton#scheduleButton:hover{    \n"
-            "    background-color: qlineargradient(spread:pad,x1:0,"
-            " y1:0.505682, x2:1, y2:0.477, stop:0 rgba(40, 67, 98, 219),"
-            " stop:1 rgba(105, 118, 132, 226));\n"
-            "}\n"
-            "QPushButton#scheduleButton:pressed{\n"
-            "    padding-left:5px;\n"
-            "    padding-top:5px;\n"
-            "    background-color: rgba(105, 118, 132, 200);\n"
-            "}\n"
-            ""
+        self.schedule_button.setStyleSheet(
+            "QPushButton#scheduleButton" + button_style +
+            "QPushButton#scheduleButton:hover" + hover_style +
+            "QPushButton#scheduleButton:pressed" + pressed_style
         )
-        self.scheduleButton.setObjectName('scheduleButton')
+        self.schedule_button.setObjectName('scheduleButton')
         self.updateScheduleButton = QtWidgets.QPushButton(self.widget_2)
         self.updateScheduleButton.setGeometry(QtCore.QRect(10, 270, 211, 101))
         font = QtGui.QFont()
@@ -120,25 +126,9 @@ class MainUI(QtWidgets.QWidget):
             QtGui.QCursor(QtCore.Qt.PointingHandCursor)
         )
         self.updateScheduleButton.setStyleSheet(
-            "QPushButton#updateScheduleButton{\n"
-            "    border-image: none;\n"
-            "    background-color: qlineargradient(spread:pad,x1:0,"
-            " y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20, 47, 78, 219),"
-            " stop:1 rgba(85, 98, 112, 226));\n"
-            "    color: rgba(255, 255, 255, 210);\n"
-            "    border-radius: 5px;    \n"
-            "}\n"
-            "QPushButton#updateScheduleButton:hover{    \n"
-            "    background-color: qlineargradient(spread:pad,x1:0,"
-            " y1:0.505682, x2:1, y2:0.477, stop:0 rgba(40, 67, 98, 219),"
-            " stop:1 rgba(105, 118, 132, 226));\n"
-            "}\n"
-            "QPushButton#updateScheduleButton:pressed{\n"
-            "    padding-left:5px;\n"
-            "    padding-top:5px;\n"
-            "    background-color: rgba(105, 118, 132, 200);\n"
-            "}\n"
-            ""
+            "QPushButton#updateScheduleButton" + button_style +
+            "QPushButton#updateScheduleButton:hover" + hover_style +
+            "QPushButton#updateScheduleButton:pressed" + pressed_style
         )
         self.updateScheduleButton.setObjectName('updateScheduleButton')
         self.customScheduleButton = QtWidgets.QPushButton(self.widget_2)
@@ -152,25 +142,9 @@ class MainUI(QtWidgets.QWidget):
             QtGui.QCursor(QtCore.Qt.PointingHandCursor)
         )
         self.customScheduleButton.setStyleSheet(
-            "QPushButton#customScheduleButton{\n"
-            "    border-image: none;\n"
-            "    background-color: qlineargradient(spread:pad,x1:0,"
-            " y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20, 47, 78, 219),"
-            " stop:1 rgba(85, 98, 112, 226));\n"
-            "    color: rgba(255, 255, 255, 210);\n"
-            "    border-radius: 5px;    \n"
-            "}\n"
-            "QPushButton#customScheduleButton:hover{    \n"
-            "    background-color: qlineargradient(spread:pad,x1:0,"
-            " y1:0.505682, x2:1, y2:0.477, stop:0 rgba(40, 67, 98, 219),"
-            " stop:1 rgba(105, 118, 132, 226));\n"
-            "}\n"
-            "QPushButton#customScheduleButton:pressed{\n"
-            "    padding-left:5px;\n"
-            "    padding-top:5px;\n"
-            "    background-color: rgba(105, 118, 132, 200);\n"
-            "}\n"
-            ""
+            "QPushButton#customScheduleButton" + button_style +
+            "QPushButton#customScheduleButton:hover" + hover_style +
+            "QPushButton#customScheduleButton:pressed" + pressed_style
         )
         self.customScheduleButton.setObjectName('customScheduleButton')
         self.nextAppointmentsButton = QtWidgets.QPushButton(self.widget_2)
@@ -186,25 +160,9 @@ class MainUI(QtWidgets.QWidget):
             QtGui.QCursor(QtCore.Qt.PointingHandCursor)
         )
         self.nextAppointmentsButton.setStyleSheet(
-            "QPushButton#nextAppointmentsButton{\n"
-            "    border-image: none;\n"
-            "    background-color: qlineargradient(spread:pad,x1:0,"
-            " y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20, 47, 78, 219),"
-            " stop:1 rgba(85, 98, 112, 226));\n"
-            "    color: rgba(255, 255, 255, 210);\n"
-            "    border-radius: 5px;    \n"
-            "}\n"
-            "QPushButton#nextAppointmentsButton:hover{    \n"
-            "    background-color: qlineargradient(spread:pad,x1:0,"
-            " y1:0.505682, x2:1, y2:0.477, stop:0 rgba(40, 67, 98, 219),"
-            " stop:1 rgba(105, 118, 132, 226));\n"
-            "}\n"
-            "QPushButton#nextAppointmentsButton:pressed{\n"
-            "    padding-left:5px;\n"
-            "    padding-top:5px;\n"
-            "    background-color: rgba(105, 118, 132, 200);\n"
-            "}\n"
-            ""
+            "QPushButton#nextAppointmentsButton" + button_style +
+            "QPushButton#nextAppointmentsButton:hover" + hover_style +
+            "QPushButton#nextAppointmentsButton:pressed" + pressed_style
         )
         self.nextAppointmentsButton.setObjectName('nextAppointmentsButton')
         self.patientDetailsButton = QtWidgets.QPushButton(self.widget_2)
@@ -218,25 +176,9 @@ class MainUI(QtWidgets.QWidget):
             QtGui.QCursor(QtCore.Qt.PointingHandCursor)
         )
         self.patientDetailsButton.setStyleSheet(
-            "QPushButton#patientDetailsButton{\n"
-            "    border-image: none;\n"
-            "    background-color: qlineargradient(spread:pad,x1:0,"
-            " y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20, 47, 78, 219),"
-            " stop:1 rgba(85, 98, 112, 226));\n"
-            "    color: rgba(255, 255, 255, 210);\n"
-            "    border-radius: 5px;    \n"
-            "}\n"
-            "QPushButton#patientDetailsButton:hover{    \n"
-            "    background-color: qlineargradient(spread:pad,x1:0,"
-            " y1:0.505682, x2:1, y2:0.477, stop:0 rgba(40, 67, 98, 219),"
-            " stop:1 rgba(105, 118, 132, 226));\n"
-            "}\n"
-            "QPushButton#patientDetailsButton:pressed{\n"
-            "    padding-left:5px;\n"
-            "    padding-top:5px;\n"
-            "    background-color: rgba(105, 118, 132, 200);\n"
-            "}\n"
-            ""
+            "QPushButton#patientDetailsButton" + button_style +
+            "QPushButton#patientDetailsButton:hover" + hover_style +
+            "QPushButton#patientDetailsButton:pressed" + pressed_style
         )
         self.patientDetailsButton.setObjectName("patientDetailsButton")
         self.addPatientButton = QtWidgets.QPushButton(self.widget_2)
@@ -250,59 +192,29 @@ class MainUI(QtWidgets.QWidget):
             QtGui.QCursor(QtCore.Qt.PointingHandCursor)
         )
         self.addPatientButton.setStyleSheet(
-            "QPushButton#addPatientButton{\n"
-            "    border-image: none;\n"
-            "    background-color: qlineargradient(spread:pad,x1:0, "
-            "y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20, 47, 78, 219),"
-            " stop:1 rgba(85, 98, 112, 226));\n"
-            "    color: rgba(255, 255, 255, 210);\n"
-            "    border-radius: 5px;    \n"
-            "}\n"
-            "QPushButton#addPatientButton:hover{    \n"
-            "    background-color: qlineargradient(spread:pad,x1:0, "
-            "y1:0.505682, x2:1, y2:0.477, stop:0 rgba(40, 67, 98, 219),"
-            " stop:1 rgba(105, 118, 132, 226));\n"
-            "}\n"
-            "QPushButton#addPatientButton:pressed{\n"
-            "    padding-left:5px;\n"
-            "    padding-top:5px;\n"
-            "    background-color: rgba(105, 118, 132, 200);\n"
-            "}\n"
-            ""
+            "QPushButton#addPatientButton" + button_style +
+            "QPushButton#addPatientButton:hover" + hover_style +
+            "QPushButton#addPatientButton:pressed" + pressed_style
         )
         self.addPatientButton.setObjectName("addPatientButton")
-        self.patientHistoryButton = QtWidgets.QPushButton(self.widget_2)
-        self.patientHistoryButton.setGeometry(QtCore.QRect(240, 390, 211, 101))
+        self.patient_history_button = QtWidgets.QPushButton(self.widget_2)
+        self.patient_history_button.setGeometry(
+            QtCore.QRect(240, 390, 211, 101)
+        )
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
         font.setWeight(75)
-        self.patientHistoryButton.setFont(font)
-        self.patientHistoryButton.setCursor(
+        self.patient_history_button.setFont(font)
+        self.patient_history_button.setCursor(
             QtGui.QCursor(QtCore.Qt.PointingHandCursor)
         )
-        self.patientHistoryButton.setStyleSheet(
-            "QPushButton#patientHistoryButton{\n"
-            "    border-image: none;\n"
-            "    background-color: qlineargradient(spread:pad,x1:0,"
-            " y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20, 47, 78, 219),"
-            " stop:1 rgba(85, 98, 112, 226));\n"
-            "    color: rgba(255, 255, 255, 210);\n"
-            "    border-radius: 5px;    \n"
-            "}\n"
-            "QPushButton#patientHistoryButton:hover{    \n"
-            "    background-color: qlineargradient(spread:pad,x1:0,"
-            " y1:0.505682, x2:1, y2:0.477, stop:0 rgba(40, 67, 98, 219),"
-            " stop:1 rgba(105, 118, 132, 226));\n"
-            "}\n"
-            "QPushButton#patientHistoryButton:pressed{\n"
-            "    padding-left:5px;\n"
-            "    padding-top:5px;\n"
-            "    background-color: rgba(105, 118, 132, 200);\n"
-            "}\n"
-            ""
+        self.patient_history_button.setStyleSheet(
+            "QPushButton#patientHistoryButton" + button_style +
+            "QPushButton#patientHistoryButton:hover" + hover_style +
+            "QPushButton#patientHistoryButton:pressed" + pressed_style
         )
-        self.patientHistoryButton.setObjectName("patientHistoryButton")
+        self.patient_history_button.setObjectName("patientHistoryButton")
         self.availableTimesButton = QtWidgets.QPushButton(self.widget_2)
         self.availableTimesButton.setGeometry(QtCore.QRect(240, 510, 211, 101))
         font = QtGui.QFont()
@@ -314,25 +226,9 @@ class MainUI(QtWidgets.QWidget):
             QtGui.QCursor(QtCore.Qt.PointingHandCursor)
         )
         self.availableTimesButton.setStyleSheet(
-            "QPushButton#availableTimesButton{\n"
-            "    border-image: none;\n"
-            "    background-color: qlineargradient(spread:pad,x1:0,"
-            " y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20, 47, 78, 219),"
-            " stop:1 rgba(85, 98, 112, 226));\n"
-            "    color: rgba(255, 255, 255, 210);\n"
-            "    border-radius: 5px;    \n"
-            "}\n"
-            "QPushButton#availableTimesButton:hover{    \n"
-            "    background-color: qlineargradient(spread:pad,x1:0,"
-            " y1:0.505682, x2:1, y2:0.477, stop:0 rgba(40, 67, 98, 219),"
-            " stop:1 rgba(105, 118, 132, 226));\n"
-            "}\n"
-            "QPushButton#availableTimesButton:pressed{\n"
-            "    padding-left:5px;\n"
-            "    padding-top:5px;\n"
-            "    background-color: rgba(105, 118, 132, 200);\n"
-            "}\n"
-            ""
+            "QPushButton#availableTimesButton" + button_style +
+            "QPushButton#availableTimesButton:hover" + hover_style +
+            "QPushButton#availableTimesButton:pressed" + pressed_style
         )
         self.availableTimesButton.setObjectName("availableTimesButton")
         self.sendResultsButton = QtWidgets.QPushButton(self.widget_2)
@@ -346,25 +242,9 @@ class MainUI(QtWidgets.QWidget):
             QtGui.QCursor(QtCore.Qt.PointingHandCursor)
         )
         self.sendResultsButton.setStyleSheet(
-            "QPushButton#sendResultsButton{\n"
-            "    border-image: none;\n"
-            "    background-color: qlineargradient(spread:pad,x1:0,"
-            " y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20, 47, 78, 219),"
-            " stop:1 rgba(85, 98, 112, 226));\n"
-            "    color: rgba(255, 255, 255, 210);\n"
-            "    border-radius: 5px;    \n"
-            "}\n"
-            "QPushButton#sendResultsButton:hover{    \n"
-            "    background-color: qlineargradient(spread:pad,x1:0,"
-            " y1:0.505682, x2:1, y2:0.477, stop:0 rgba(40, 67, 98, 219),"
-            " stop:1 rgba(105, 118, 132, 226));\n"
-            "}\n"
-            "QPushButton#sendResultsButton:pressed{\n"
-            "    padding-left:5px;\n"
-            "    padding-top:5px;\n"
-            "    background-color: rgba(105, 118, 132, 200);\n"
-            "}\n"
-            ""
+            "QPushButton#sendResultsButton" + button_style +
+            "QPushButton#sendResultsButton:hover" + hover_style +
+            "QPushButton#sendResultsButton:pressed" + pressed_style
         )
         self.sendResultsButton.setObjectName("sendResultsButton")
         self.updateProceduresButton = QtWidgets.QPushButton(self.widget_2)
@@ -380,40 +260,31 @@ class MainUI(QtWidgets.QWidget):
             QtGui.QCursor(QtCore.Qt.PointingHandCursor)
         )
         self.updateProceduresButton.setStyleSheet(
-            "QPushButton#updateProceduresButton{\n"
-            "    border-image: none;\n"
-            "    background-color: qlineargradient(spread:pad,x1:0,"
-            " y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20, 47, 78, 219),"
-            " stop:1 rgba(85, 98, 112, 226));\n"
-            "    color: rgba(255, 255, 255, 210);\n"
-            "    border-radius: 5px;    \n"
-            "}\n"
-            "QPushButton#updateProceduresButton:hover{    \n"
-            "    background-color: qlineargradient(spread:pad,x1:0,"
-            " y1:0.505682, x2:1, y2:0.477, stop:0 rgba(40, 67, 98, 219),"
-            " stop:1 rgba(105, 118, 132, 226));\n"
-            "}\n"
-            "QPushButton#updateProceduresButton:pressed{\n"
-            "    padding-left:5px;\n"
-            "    padding-top:5px;\n"
-            "    background-color: rgba(105, 118, 132, 200);\n"
-            "}\n"
-            ""
+            "QPushButton#updateProceduresButton" + button_style +
+            "QPushButton#updateProceduresButton:hover" + hover_style +
+            "QPushButton#updateProceduresButton:pressed" + pressed_style
         )
         self.updateProceduresButton.setObjectName("updateProceduresButton")
-        self.retranslateUi(self.window)
+        self.retranslateUi()
         QtCore.QMetaObject.connectSlotsByName(self.window)
+        self.patient_history_button.clicked.connect(self.on_history_click)
 
-    def retranslateUi(self, Form):
+    def on_history_click(self):
+        self.new_window = CustomNewWindow()
+        history_ui = HistoryUI(self.new_window, self.username)
+        self.new_window.setCentralWidget(history_ui.widget)
+        self.new_window.show()
+
+    def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate('Form', 'OdontoDj'))
+        self.window.setWindowTitle(_translate('Form', 'OdontoDj'))
         self.label_2.setText(_translate(
             'Form', f"You're logged in as {self.username}"
         ))
         self.logoutButton.setText(_translate(
             'Form', 'Logout'
         ))
-        self.scheduleButton.setText(_translate(
+        self.schedule_button.setText(_translate(
             'Form', 'New Appointment'
         ))
         self.updateScheduleButton.setText(_translate(
@@ -431,7 +302,7 @@ class MainUI(QtWidgets.QWidget):
         self.addPatientButton.setText(_translate(
             'Form', 'Add New Patient'
         ))
-        self.patientHistoryButton.setText(_translate(
+        self.patient_history_button.setText(_translate(
             'Form', 'Patient History'
         ))
         self.availableTimesButton.setText(_translate(
