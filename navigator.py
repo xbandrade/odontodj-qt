@@ -1,6 +1,6 @@
-def navigate_to_main_app(window, username):
+def navigate_to_main_app(window, username, url, access_token):
     from mainUI import MainUI
-    main_ui = MainUI(window, username)
+    main_ui = MainUI(window, username, url, access_token)
     window.centralWidget().deleteLater()
     window.setCentralWidget(main_ui.widget)
 

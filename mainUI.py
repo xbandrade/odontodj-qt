@@ -1,4 +1,5 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QVBoxLayout
 
 import gui.main.res  # noqa
 from historyUI import HistoryUI
@@ -7,8 +8,10 @@ from window import CustomNewWindow
 
 
 class MainUI(QtWidgets.QWidget):
-    def __init__(self, parent=None, username='NONE'):
+    def __init__(self, parent=None, username='NONE', url='', access_token=''):
         super().__init__(parent)
+        self.url = url
+        self.access_token = access_token
         self.window = parent
         self.username = username
         self.setupUi()
@@ -18,6 +21,7 @@ class MainUI(QtWidgets.QWidget):
         self.widget = QtWidgets.QWidget(self.window)
         self.widget.setGeometry(QtCore.QRect(0, 0, 1121, 761))
         self.widget.setObjectName('widget')
+        self.layout = QVBoxLayout(self.widget)
         self.widget_2 = QtWidgets.QWidget(self.widget)
         self.widget_2.setGeometry(QtCore.QRect(0, 0, 1121, 761))
         self.widget_2.setStyleSheet(
@@ -266,6 +270,8 @@ class MainUI(QtWidgets.QWidget):
             "QPushButton#updateProceduresButton:pressed" + pressed_style
         )
         self.updateProceduresButton.setObjectName("updateProceduresButton")
+        # self.add_widgets_to_layout()
+        # self.widget.setLayout(self.layout)
         self.retranslateUi()
         QtCore.QMetaObject.connectSlotsByName(self.window)
         self.patient_history_button.clicked.connect(self.on_history_click)
@@ -275,10 +281,27 @@ class MainUI(QtWidgets.QWidget):
         navigate_to_login_page(self.window)
 
     def on_history_click(self):
-        self.new_window = CustomNewWindow()
-        history_ui = HistoryUI(self.new_window, self.username)
-        self.new_window.setCentralWidget(history_ui.widget)
-        self.new_window.show()
+        new_window = CustomNewWindow()
+        history_ui = HistoryUI(new_window, self)
+        new_window.setCentralWidget(history_ui.widget)
+        new_window.show()
+
+    def add_widgets_to_layout(self):
+        self.layout.addWidget(self.widget_2)
+        self.layout.addWidget(self.label)
+        self.layout.addWidget(self.label_2)
+        self.layout.addWidget(self.logoutButton)
+        self.layout.addWidget(self.calendarWidget)
+        self.layout.addWidget(self.schedule_button)
+        self.layout.addWidget(self.updateScheduleButton)
+        self.layout.addWidget(self.customScheduleButton)
+        self.layout.addWidget(self.nextAppointmentsButton)
+        self.layout.addWidget(self.patientDetailsButton)
+        self.layout.addWidget(self.addPatientButton)
+        self.layout.addWidget(self.patient_history_button)
+        self.layout.addWidget(self.availableTimesButton)
+        self.layout.addWidget(self.sendResultsButton)
+        self.layout.addWidget(self.updateProceduresButton)
 
     def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate

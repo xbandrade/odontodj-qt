@@ -5,9 +5,10 @@ from window import CustomMainWindow
 
 
 def main():
+    url = 'https://odontodj.onrender.com'
     app = QApplication([])
     main_window = CustomMainWindow()
-    login_ui = LoginUI(main_window)
+    login_ui = LoginUI(main_window, url)
     main_window.setCentralWidget(login_ui.widget)
     main_window.show()
     app.exec_()

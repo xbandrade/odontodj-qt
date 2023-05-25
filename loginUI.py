@@ -1,13 +1,14 @@
-import requests  # noqa
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 import gui.login.res  # noqa
+from api_connect import jwt_login
 from navigator import navigate_to_main_app
 
 
 class LoginUI(QtWidgets.QWidget):
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, url=''):
         super().__init__(parent)
+        self.url = url
         self.window = parent
         self.setupUi()
 
@@ -40,21 +41,32 @@ class LoginUI(QtWidgets.QWidget):
         self.label_4.setStyleSheet("color: rgba(255, 255, 255, 210);")
         self.label_4.setAlignment(QtCore.Qt.AlignCenter)
         self.label_4.setObjectName('label_4')
+        self.line_edit_style = """
+            background-color: rgba(0, 0, 0, 0);\n
+            border: none;\n
+            border-bottom: 2px solid rgba(105, 118, 132, 255);\n
+            color: rgba(255, 255, 255, 230);\n
+            padding-bottom: 7px;
+        """
         self.user_line_edit = QtWidgets.QLineEdit(self.widget)
         self.user_line_edit.setGeometry(QtCore.QRect(390, 290, 251, 61))
+        font = QtGui.QFont()
+        font.setFamily('Sans Serif Collection')
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.warning_label = QtWidgets.QLabel(self.widget)
+        self.warning_label.setStyleSheet("color: rgba(255, 0, 0, 200);")
+        self.warning_label.setGeometry(QtCore.QRect(410, 335, 251, 61))
+        self.warning_label.setFont(font)
+        self.warning_label.setText('')
         font = QtGui.QFont()
         font.setPointSize(14)
         font.setBold(True)
         font.setWeight(75)
         self.user_line_edit.setFont(font)
         self.user_line_edit.setFocusPolicy(QtCore.Qt.StrongFocus)
-        self.user_line_edit.setStyleSheet(
-            "background-color: rgba(0, 0, 0, 0);\n"
-            "border: none;\n"
-            "border-bottom: 2px solid rgba(105, 118, 132, 255);\n"
-            "color: rgba(255, 255, 255, 230);\n"
-            "padding-bottom: 7px;"
-        )
+        self.user_line_edit.setStyleSheet(self.line_edit_style)
         self.user_line_edit.setText('')
         self.user_line_edit.setAlignment(QtCore.Qt.AlignCenter)
         self.user_line_edit.setObjectName('lineEdit')
@@ -66,13 +78,7 @@ class LoginUI(QtWidgets.QWidget):
         font.setWeight(75)
         self.password_line_edit.setFont(font)
         self.password_line_edit.setFocusPolicy(QtCore.Qt.StrongFocus)
-        self.password_line_edit.setStyleSheet(
-            "background-color: rgba(0, 0, 0, 0);\n"
-            "border: none;\n"
-            "border-bottom: 2px solid rgba(105, 118, 132, 255);\n"
-            "color: rgba(255, 255, 255, 230);\n"
-            "padding-bottom: 7px;"
-        )
+        self.password_line_edit.setStyleSheet(self.line_edit_style)
         self.password_line_edit.setText('')
         self.password_line_edit.setAlignment(QtCore.Qt.AlignCenter)
         self.password_line_edit.setObjectName('lineEdit_2')
@@ -163,6 +169,7 @@ class LoginUI(QtWidgets.QWidget):
         self.label_4.raise_()
         self.user_line_edit.raise_()
         self.password_line_edit.raise_()
+        self.warning_label.raise_()
         self.login_button.raise_()
         self.closeButton.raise_()
         self.minimizeButton.raise_()
@@ -187,18 +194,45 @@ class LoginUI(QtWidgets.QWidget):
     def on_login_clicked(self):
         username = self.user_line_edit.text()
         password = self.password_line_edit.text()
-        if username == '' or password == '':
+        if not username or not password:
+            self.warning_label.setText('Enter your credentials')
             print('Username and password cannot be empty')
+            self.user_line_edit.setStyleSheet(
+                self.line_edit_style +
+                "background-color: rgba(255, 0, 0, 50);"
+            )
+            self.password_line_edit.setStyleSheet(
+                self.line_edit_style +
+                "background-color: rgba(255, 0, 0, 50);"
+            )
+            self.user_line_edit.setToolTip(
+                'Username and password cannot be empty'
+            )
         else:
             self.login_user(username, password)
 
     def login_user(self, username, password):
-        us, ps = 'baxx', 't123'
-        if (username, password) == (us, ps):
+        access_token = jwt_login(self.url, username, password)
+        if access_token:
             print('Login Successful!')
-            navigate_to_main_app(self.window, username)
+            navigate_to_main_app(self.window, username, self.url, access_token)
+            self.warning_label.setStyleSheet("color: rgba(0, 255, 0, 200);")
+            self.warning_label.setText('Login Successful')
         else:
+            self.warning_label.setText('Invalid Credentials')
             print('Incorrect username or password')
+            self.user_line_edit.setStyleSheet(
+                self.line_edit_style +
+                "background-color: rgba(255, 0, 0, 50);"
+            )
+            self.password_line_edit.setStyleSheet(
+                self.line_edit_style +
+                "background-color: rgba(255, 0, 0, 50);"
+            )
+            # self.password_line_edit.setStyleSheet('background-color: red;')
+            self.user_line_edit.setToolTip(
+                'Incorrect username or password'
+            )
 
     def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate

@@ -3,13 +3,17 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QTableWidget
 
 import gui.main.res  # noqa
+from api_connect import retrieve_appointments
 
 
 class HistoryUI(QtWidgets.QWidget):
-    def __init__(self, parent=None, username='NONE'):
+    def __init__(self, parent=None, main_app=None):
         super().__init__(parent)
+        self.access_token = main_app.access_token
+        self.username = main_app.username
+        self.url = main_app.url
         self.window = parent
-        self.username = username
+        self.tableWidget = None
         self.setupUi()
 
     def setupUi(self):
@@ -75,40 +79,76 @@ class HistoryUI(QtWidgets.QWidget):
             ""
         )
         self.appointment_banner.setObjectName('scheduleButton')
-        self.tableWidget = QtWidgets.QTableWidget(self.widget_2)
-        self.tableWidget.setGeometry(QtCore.QRect(50, 250, 1011, 101))
-        self.tableWidget.setStyleSheet("border-image: none;")
-        self.tableWidget.setRowCount(1)
-        self.tableWidget.setColumnCount(8)
-        self.tableWidget.setObjectName('tableWidget')
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(0, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(1, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(2, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(3, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(4, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(5, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(6, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(7, item)
-        self.tableWidget.horizontalHeader().setVisible(True)
-        self.tableWidget.horizontalHeader().setCascadingSectionResizes(False)
-        self.tableWidget.horizontalHeader().setDefaultSectionSize(126)
-        self.tableWidget.horizontalHeader().setHighlightSections(True)
-        self.tableWidget.horizontalHeader().setMinimumSectionSize(49)
-        self.tableWidget.horizontalHeader().setSortIndicatorShown(False)
-        self.tableWidget.horizontalHeader().setStretchLastSection(False)
-        self.tableWidget.verticalHeader().setVisible(False)
-        self.tableWidget.verticalHeader().setHighlightSections(True)
-        self.tableWidget.setEditTriggers(QTableWidget.NoEditTriggers)
-        self.tableWidget.setFocusPolicy(Qt.NoFocus)
-        self.tableWidget.setSelectionMode(QTableWidget.NoSelection)
+        appointments = retrieve_appointments(self.url, self.access_token)
+        if appointments:
+            self.tableWidget = QtWidgets.QTableWidget(self.widget_2)
+            self.tableWidget.setGeometry(QtCore.QRect(50, 250, 1011, 611))
+            self.tableWidget.setStyleSheet("border-image: none;")
+            self.tableWidget.setRowCount(1)
+            self.tableWidget.setColumnCount(8)
+            self.tableWidget.setObjectName('tableWidget')
+            item = QtWidgets.QTableWidgetItem()
+            self.tableWidget.setHorizontalHeaderItem(0, item)
+            item = QtWidgets.QTableWidgetItem()
+            self.tableWidget.setHorizontalHeaderItem(1, item)
+            item = QtWidgets.QTableWidgetItem()
+            self.tableWidget.setHorizontalHeaderItem(2, item)
+            item = QtWidgets.QTableWidgetItem()
+            self.tableWidget.setHorizontalHeaderItem(3, item)
+            item = QtWidgets.QTableWidgetItem()
+            self.tableWidget.setHorizontalHeaderItem(4, item)
+            item = QtWidgets.QTableWidgetItem()
+            self.tableWidget.setHorizontalHeaderItem(5, item)
+            item = QtWidgets.QTableWidgetItem()
+            self.tableWidget.setHorizontalHeaderItem(6, item)
+            item = QtWidgets.QTableWidgetItem()
+            self.tableWidget.setHorizontalHeaderItem(7, item)
+            self.tableWidget.horizontalHeader().setVisible(True)
+            self.tableWidget.horizontalHeader().setCascadingSectionResizes(False)  # noqa
+            self.tableWidget.horizontalHeader().setDefaultSectionSize(126)
+            self.tableWidget.horizontalHeader().setHighlightSections(True)
+            self.tableWidget.horizontalHeader().setMinimumSectionSize(49)
+            self.tableWidget.horizontalHeader().setSortIndicatorShown(False)
+            self.tableWidget.horizontalHeader().setStretchLastSection(False)
+            self.tableWidget.verticalHeader().setVisible(False)
+            self.tableWidget.verticalHeader().setHighlightSections(True)
+            self.tableWidget.setEditTriggers(QTableWidget.NoEditTriggers)
+            self.tableWidget.setFocusPolicy(Qt.NoFocus)
+            self.tableWidget.setSelectionMode(QTableWidget.NoSelection)
+            data = []
+            for appt in appointments:
+                data.append([
+                    f'#0{appt.get("id")}', appt.get('procedure'),
+                    appt.get('date'), appt.get('time'), '---',  # price
+                    '✔️' if appt.get('is_confirmed') else '✖️',
+                    '✔️' if appt.get('is_completed') else '✖️', '---',  # url
+                ])
+            for row in data:
+                self.tableWidget.insertRow(self.tableWidget.rowCount())
+                for column, item in enumerate(row):
+                    self.tableWidget.setItem(
+                        self.tableWidget.rowCount() - 1,
+                        column, QtWidgets.QTableWidgetItem(item)
+                    )
+            # self.tableWidget.resizeColumnsToContents()
+            # self.tableWidget.resizeRowsToContents()
+
+        else:
+            print('No Appointments')
+            self.label_3 = QtWidgets.QLabel(self.widget_2)
+            self.label_3.setGeometry(QtCore.QRect(10, 250, 1091, 81))
+            font = QtGui.QFont()
+            font.setPointSize(17)
+            font.setBold(True)
+            font.setWeight(75)
+            self.label_3.setFont(font)
+            self.label_3.setStyleSheet(
+                "border-image: none;\n"
+                "color: rgba(255, 255, 255, 210);"
+            )
+            self.label_3.setAlignment(QtCore.Qt.AlignCenter)
+            self.label_3.setObjectName('label_2')
+            self.label_3.setText('No Appointments Found')
         self.retranslateUi()
         QtCore.QMetaObject.connectSlotsByName(self.window)
 
@@ -119,19 +159,20 @@ class HistoryUI(QtWidgets.QWidget):
         self.appointment_banner.setText(_translate(
             'Form', f"{self.username}'s Appointments")
         )
-        item = self.tableWidget.horizontalHeaderItem(0)
-        item.setText(_translate('Form', 'ID'))
-        item = self.tableWidget.horizontalHeaderItem(1)
-        item.setText(_translate('Form', 'Procedure'))
-        item = self.tableWidget.horizontalHeaderItem(2)
-        item.setText(_translate('Form', 'Date'))
-        item = self.tableWidget.horizontalHeaderItem(3)
-        item.setText(_translate('Form', 'Time'))
-        item = self.tableWidget.horizontalHeaderItem(4)
-        item.setText(_translate('Form', 'Price'))
-        item = self.tableWidget.horizontalHeaderItem(5)
-        item.setText(_translate('Form', 'Confirmed'))
-        item = self.tableWidget.horizontalHeaderItem(6)
-        item.setText(_translate('Form', 'Completed'))
-        item = self.tableWidget.horizontalHeaderItem(7)
-        item.setText(_translate('Form', 'URL'))
+        if self.tableWidget:
+            item = self.tableWidget.horizontalHeaderItem(0)
+            item.setText(_translate('Form', 'ID'))
+            item = self.tableWidget.horizontalHeaderItem(1)
+            item.setText(_translate('Form', 'Procedure'))
+            item = self.tableWidget.horizontalHeaderItem(2)
+            item.setText(_translate('Form', 'Date'))
+            item = self.tableWidget.horizontalHeaderItem(3)
+            item.setText(_translate('Form', 'Time'))
+            item = self.tableWidget.horizontalHeaderItem(4)
+            item.setText(_translate('Form', 'Price'))
+            item = self.tableWidget.horizontalHeaderItem(5)
+            item.setText(_translate('Form', 'Confirmed'))
+            item = self.tableWidget.horizontalHeaderItem(6)
+            item.setText(_translate('Form', 'Completed'))
+            item = self.tableWidget.horizontalHeaderItem(7)
+            item.setText(_translate('Form', 'URL'))
