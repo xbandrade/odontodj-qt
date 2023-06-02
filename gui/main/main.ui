@@ -6,271 +6,64 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1121</width>
-    <height>762</height>
+    <width>1161</width>
+    <height>781</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QWidget" name="widget" native="true">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1121</width>
-     <height>761</height>
-    </rect>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>0</number>
    </property>
-   <widget class="QWidget" name="widget_2" native="true">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>1121</width>
-      <height>761</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">border-image: url(:/newPrefix/images/app_bg.jpg);</string>
-    </property>
-    <widget class="QLabel" name="label">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>91</width>
-       <height>91</height>
-      </rect>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item row="0" column="0">
+    <widget class="QWidget" name="widget" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
      </property>
      <property name="styleSheet">
-      <string notr="true">border-image: url(:/newPrefix/images/od_logo.png);</string>
+      <string notr="true">border-image: url(:/newPrefix/images/app_bg.jpg);</string>
      </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_2">
-     <property name="geometry">
-      <rect>
-       <x>420</x>
-       <y>0</y>
-       <width>551</width>
-       <height>81</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>17</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">border-image: none;
-color: rgba(255, 255, 255, 210);</string>
-     </property>
-     <property name="text">
-      <string>You're logged in as &lt;username&gt;</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="logoutButton">
-     <property name="geometry">
-      <rect>
-       <x>970</x>
-       <y>20</y>
-       <width>131</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton#logoutButton{
-	border-image: none;
-	background-color: qlineargradient(spread:pad,x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20, 47, 78, 219), stop:1 rgba(30, 57, 88, 219));
-	color: rgba(255, 55, 55, 210);
-	border-radius: 5px;	
-}
-QPushButton#logoutButton:hover{
-	background-color: qlineargradient(spread:pad,x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(40, 67, 98, 219), stop:1 rgba(50, 77, 108, 219));
-}
-QPushButton#logoutButton:pressed{
-	padding-left:5px;
-	padding-top:5px;
-	background-color: rgba(105, 118, 132, 200);
-}
-</string>
-     </property>
-     <property name="text">
-      <string>Logout</string>
-     </property>
-    </widget>
-    <widget class="QCalendarWidget" name="calendarWidget">
-     <property name="geometry">
-      <rect>
-       <x>470</x>
-       <y>130</y>
-       <width>631</width>
-       <height>601</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">border-image: none;</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="scheduleButton">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>150</y>
-       <width>211</width>
-       <height>101</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton#scheduleButton{
-	border-image: none;
-	background-color: qlineargradient(spread:pad,x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20, 47, 78, 219), stop:1 rgba(85, 98, 112, 226));
-	color: rgba(255, 255, 255, 210);
-	border-radius: 5px;	
-}
-QPushButton#scheduleButton:hover{	
-	background-color: qlineargradient(spread:pad,x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(40, 67, 98, 219), stop:1 rgba(105, 118, 132, 226));
-}
-QPushButton#scheduleButton:pressed{
-	padding-left:5px;
-	padding-top:5px;
-	background-color: rgba(105, 118, 132, 200);
-}
-</string>
-     </property>
-     <property name="text">
-      <string>New Appointment</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="updateScheduleButton">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>270</y>
-       <width>211</width>
-       <height>101</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton#updateScheduleButton{
-	border-image: none;
-	background-color: qlineargradient(spread:pad,x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20, 47, 78, 219), stop:1 rgba(85, 98, 112, 226));
-	color: rgba(255, 255, 255, 210);
-	border-radius: 5px;	
-}
-QPushButton#updateScheduleButton:hover{	
-	background-color: qlineargradient(spread:pad,x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(40, 67, 98, 219), stop:1 rgba(105, 118, 132, 226));
-}
-QPushButton#updateScheduleButton:pressed{
-	padding-left:5px;
-	padding-top:5px;
-	background-color: rgba(105, 118, 132, 200);
-}
-</string>
-     </property>
-     <property name="text">
-      <string>Update Appointment</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="customScheduleButton">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>390</y>
-       <width>211</width>
-       <height>101</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton#customScheduleButton{
-	border-image: none;
-	background-color: qlineargradient(spread:pad,x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20, 47, 78, 219), stop:1 rgba(85, 98, 112, 226));
-	color: rgba(255, 255, 255, 210);
-	border-radius: 5px;	
-}
-QPushButton#customScheduleButton:hover{	
-	background-color: qlineargradient(spread:pad,x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(40, 67, 98, 219), stop:1 rgba(105, 118, 132, 226));
-}
-QPushButton#customScheduleButton:pressed{
-	padding-left:5px;
-	padding-top:5px;
-	background-color: rgba(105, 118, 132, 200);
-}
-</string>
-     </property>
-     <property name="text">
-      <string>Custom Appointment</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="nextAppointmentsButton">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>510</y>
-       <width>211</width>
-       <height>101</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton#nextAppointmentsButton{
+     <widget class="QPushButton" name="nextAppointmentsButton">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>520</y>
+        <width>211</width>
+        <height>101</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#nextAppointmentsButton{
 	border-image: none;
 	background-color: qlineargradient(spread:pad,x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20, 47, 78, 219), stop:1 rgba(85, 98, 112, 226));
 	color: rgba(255, 255, 255, 210);
@@ -285,192 +78,32 @@ QPushButton#nextAppointmentsButton:pressed{
 	background-color: rgba(105, 118, 132, 200);
 }
 </string>
-     </property>
-     <property name="text">
-      <string>Next Appointments</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="patientDetailsButton">
-     <property name="geometry">
-      <rect>
-       <x>240</x>
-       <y>270</y>
-       <width>211</width>
-       <height>101</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton#patientDetailsButton{
-	border-image: none;
-	background-color: qlineargradient(spread:pad,x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20, 47, 78, 219), stop:1 rgba(85, 98, 112, 226));
-	color: rgba(255, 255, 255, 210);
-	border-radius: 5px;	
-}
-QPushButton#patientDetailsButton:hover{	
-	background-color: qlineargradient(spread:pad,x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(40, 67, 98, 219), stop:1 rgba(105, 118, 132, 226));
-}
-QPushButton#patientDetailsButton:pressed{
-	padding-left:5px;
-	padding-top:5px;
-	background-color: rgba(105, 118, 132, 200);
-}
-</string>
-     </property>
-     <property name="text">
-      <string>Patient Details</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="addPatientButton">
-     <property name="geometry">
-      <rect>
-       <x>240</x>
-       <y>150</y>
-       <width>211</width>
-       <height>101</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton#addPatientButton{
-	border-image: none;
-	background-color: qlineargradient(spread:pad,x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20, 47, 78, 219), stop:1 rgba(85, 98, 112, 226));
-	color: rgba(255, 255, 255, 210);
-	border-radius: 5px;	
-}
-QPushButton#addPatientButton:hover{	
-	background-color: qlineargradient(spread:pad,x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(40, 67, 98, 219), stop:1 rgba(105, 118, 132, 226));
-}
-QPushButton#addPatientButton:pressed{
-	padding-left:5px;
-	padding-top:5px;
-	background-color: rgba(105, 118, 132, 200);
-}
-</string>
-     </property>
-     <property name="text">
-      <string>Add New Patient</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="patientHistoryButton">
-     <property name="geometry">
-      <rect>
-       <x>240</x>
-       <y>390</y>
-       <width>211</width>
-       <height>101</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton#patientHistoryButton{
-	border-image: none;
-	background-color: qlineargradient(spread:pad,x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20, 47, 78, 219), stop:1 rgba(85, 98, 112, 226));
-	color: rgba(255, 255, 255, 210);
-	border-radius: 5px;	
-}
-QPushButton#patientHistoryButton:hover{	
-	background-color: qlineargradient(spread:pad,x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(40, 67, 98, 219), stop:1 rgba(105, 118, 132, 226));
-}
-QPushButton#patientHistoryButton:pressed{
-	padding-left:5px;
-	padding-top:5px;
-	background-color: rgba(105, 118, 132, 200);
-}
-</string>
-     </property>
-     <property name="text">
-      <string>Patient History</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="availableTimesButton">
-     <property name="geometry">
-      <rect>
-       <x>240</x>
-       <y>510</y>
-       <width>211</width>
-       <height>101</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton#availableTimesButton{
-	border-image: none;
-	background-color: qlineargradient(spread:pad,x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20, 47, 78, 219), stop:1 rgba(85, 98, 112, 226));
-	color: rgba(255, 255, 255, 210);
-	border-radius: 5px;	
-}
-QPushButton#availableTimesButton:hover{	
-	background-color: qlineargradient(spread:pad,x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(40, 67, 98, 219), stop:1 rgba(105, 118, 132, 226));
-}
-QPushButton#availableTimesButton:pressed{
-	padding-left:5px;
-	padding-top:5px;
-	background-color: rgba(105, 118, 132, 200);
-}
-</string>
-     </property>
-     <property name="text">
-      <string>Available Times</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="sendResultsButton">
-     <property name="geometry">
-      <rect>
-       <x>240</x>
-       <y>630</y>
-       <width>211</width>
-       <height>101</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton#sendResultsButton{
+      </property>
+      <property name="text">
+       <string>Next Appointments</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="sendResultsButton">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>640</y>
+        <width>211</width>
+        <height>101</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#sendResultsButton{
 	border-image: none;
 	background-color: qlineargradient(spread:pad,x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20, 47, 78, 219), stop:1 rgba(85, 98, 112, 226));
 	color: rgba(255, 255, 255, 210);
@@ -485,32 +118,427 @@ QPushButton#sendResultsButton:pressed{
 	background-color: rgba(105, 118, 132, 200);
 }
 </string>
-     </property>
-     <property name="text">
-      <string>Send Procedure Results</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="updateProceduresButton">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>630</y>
-       <width>211</width>
-       <height>101</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton#updateProceduresButton{
+      </property>
+      <property name="text">
+       <string>Send Procedure Results</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="addPatientButton">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>160</y>
+        <width>211</width>
+        <height>101</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#addPatientButton{
+	border-image: none;
+	background-color: qlineargradient(spread:pad,x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20, 47, 78, 219), stop:1 rgba(85, 98, 112, 226));
+	color: rgba(255, 255, 255, 210);
+	border-radius: 5px;	
+}
+QPushButton#addPatientButton:hover{	
+	background-color: qlineargradient(spread:pad,x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(40, 67, 98, 219), stop:1 rgba(105, 118, 132, 226));
+}
+QPushButton#addPatientButton:pressed{
+	padding-left:5px;
+	padding-top:5px;
+	background-color: rgba(105, 118, 132, 200);
+}
+</string>
+      </property>
+      <property name="text">
+       <string>Add New Patient</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>91</width>
+        <height>91</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border-image: url(:/newPrefix/images/od_logo.png);</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="patientDetailsButton">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>280</y>
+        <width>211</width>
+        <height>101</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#patientDetailsButton{
+	border-image: none;
+	background-color: qlineargradient(spread:pad,x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20, 47, 78, 219), stop:1 rgba(85, 98, 112, 226));
+	color: rgba(255, 255, 255, 210);
+	border-radius: 5px;	
+}
+QPushButton#patientDetailsButton:hover{	
+	background-color: qlineargradient(spread:pad,x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(40, 67, 98, 219), stop:1 rgba(105, 118, 132, 226));
+}
+QPushButton#patientDetailsButton:pressed{
+	padding-left:5px;
+	padding-top:5px;
+	background-color: rgba(105, 118, 132, 200);
+}
+</string>
+      </property>
+      <property name="text">
+       <string>Patient Details</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="updateScheduleButton">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>280</y>
+        <width>211</width>
+        <height>101</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#updateScheduleButton{
+	border-image: none;
+	background-color: qlineargradient(spread:pad,x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20, 47, 78, 219), stop:1 rgba(85, 98, 112, 226));
+	color: rgba(255, 255, 255, 210);
+	border-radius: 5px;	
+}
+QPushButton#updateScheduleButton:hover{	
+	background-color: qlineargradient(spread:pad,x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(40, 67, 98, 219), stop:1 rgba(105, 118, 132, 226));
+}
+QPushButton#updateScheduleButton:pressed{
+	padding-left:5px;
+	padding-top:5px;
+	background-color: rgba(105, 118, 132, 200);
+}
+</string>
+      </property>
+      <property name="text">
+       <string>Update Appointment</string>
+      </property>
+     </widget>
+     <widget class="QCalendarWidget" name="calendarWidget">
+      <property name="geometry">
+       <rect>
+        <x>480</x>
+        <y>140</y>
+        <width>661</width>
+        <height>601</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border-image: none;</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="logoutButton">
+      <property name="geometry">
+       <rect>
+        <x>980</x>
+        <y>30</y>
+        <width>131</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#logoutButton{
+	border-image: none;
+	background-color: qlineargradient(spread:pad,x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20, 47, 78, 219), stop:1 rgba(30, 57, 88, 219));
+	color: rgba(255, 55, 55, 210);
+	border-radius: 5px;	
+}
+QPushButton#logoutButton:hover{
+	background-color: qlineargradient(spread:pad,x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(40, 67, 98, 219), stop:1 rgba(50, 77, 108, 219));
+}
+QPushButton#logoutButton:pressed{
+	padding-left:5px;
+	padding-top:5px;
+	background-color: rgba(105, 118, 132, 200);
+}
+</string>
+      </property>
+      <property name="text">
+       <string>Logout</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="patientHistoryButton">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>400</y>
+        <width>211</width>
+        <height>101</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#patientHistoryButton{
+	border-image: none;
+	background-color: qlineargradient(spread:pad,x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20, 47, 78, 219), stop:1 rgba(85, 98, 112, 226));
+	color: rgba(255, 255, 255, 210);
+	border-radius: 5px;	
+}
+QPushButton#patientHistoryButton:hover{	
+	background-color: qlineargradient(spread:pad,x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(40, 67, 98, 219), stop:1 rgba(105, 118, 132, 226));
+}
+QPushButton#patientHistoryButton:pressed{
+	padding-left:5px;
+	padding-top:5px;
+	background-color: rgba(105, 118, 132, 200);
+}
+</string>
+      </property>
+      <property name="text">
+       <string>Patient History</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="schedule_button">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>160</y>
+        <width>211</width>
+        <height>101</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#schedule_button {
+    border-image: none;
+    background-color: qconicalgradient(cx:0.5, cy:0.5, angle:45, stop:0 rgba(85, 98, 112, 226), stop:0.5 rgba(20, 47, 78, 219), stop:1 rgba(85, 98, 112, 226));
+    color: rgba(255, 255, 255, 210);
+    border-radius: 5px;
+}
+
+QPushButton#schedule_button:hover {
+    background-color: qconicalgradient(cx:0.5, cy:0.5, angle:45, stop:0 rgba(105, 118, 132, 226), stop:0.5 rgba(40, 67, 98, 219), stop:1 rgba(105, 118, 132, 226));
+}
+
+QPushButton#schedule_button:pressed {
+    padding-left: 5px;
+    padding-top: 5px;
+    background-color: rgba(105, 118, 132, 200);
+}</string>
+      </property>
+      <property name="text">
+       <string>New Appointment</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>430</x>
+        <y>10</y>
+        <width>551</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>17</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border-image: none;
+color: rgba(255, 255, 255, 210);</string>
+      </property>
+      <property name="text">
+       <string>You're logged in as &lt;username&gt;</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="availableTimesButton">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>520</y>
+        <width>211</width>
+        <height>101</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#availableTimesButton{
+	border-image: none;
+	background-color: qlineargradient(spread:pad,x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20, 47, 78, 219), stop:1 rgba(85, 98, 112, 226));
+	color: rgba(255, 255, 255, 210);
+	border-radius: 5px;	
+}
+QPushButton#availableTimesButton:hover{	
+	background-color: qlineargradient(spread:pad,x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(40, 67, 98, 219), stop:1 rgba(105, 118, 132, 226));
+}
+QPushButton#availableTimesButton:pressed{
+	padding-left:5px;
+	padding-top:5px;
+	background-color: rgba(105, 118, 132, 200);
+}
+</string>
+      </property>
+      <property name="text">
+       <string>Available Times</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="customScheduleButton">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>400</y>
+        <width>211</width>
+        <height>101</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#customScheduleButton{
+	border-image: none;
+	background-color: qlineargradient(spread:pad,x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20, 47, 78, 219), stop:1 rgba(85, 98, 112, 226));
+	color: rgba(255, 255, 255, 210);
+	border-radius: 5px;	
+}
+QPushButton#customScheduleButton:hover{	
+	background-color: qlineargradient(spread:pad,x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(40, 67, 98, 219), stop:1 rgba(105, 118, 132, 226));
+}
+QPushButton#customScheduleButton:pressed{
+	padding-left:5px;
+	padding-top:5px;
+	background-color: rgba(105, 118, 132, 200);
+}
+</string>
+      </property>
+      <property name="text">
+       <string>Custom Appointment</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="updateProceduresButton">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>640</y>
+        <width>211</width>
+        <height>101</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#updateProceduresButton{
 	border-image: none;
 	background-color: qlineargradient(spread:pad,x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20, 47, 78, 219), stop:1 rgba(85, 98, 112, 226));
 	color: rgba(255, 255, 255, 210);
@@ -525,13 +553,14 @@ QPushButton#updateProceduresButton:pressed{
 	background-color: rgba(105, 118, 132, 200);
 }
 </string>
-     </property>
-     <property name="text">
-      <string>Update Procedures</string>
-     </property>
+      </property>
+      <property name="text">
+       <string>Update Procedures</string>
+      </property>
+     </widget>
     </widget>
-   </widget>
-  </widget>
+   </item>
+  </layout>
  </widget>
  <resources>
   <include location="res.qrc"/>

@@ -38,6 +38,9 @@ class CustomMainWindow(QMainWindow):
 
     def switch_to_framed(self):
         self.setWindowFlags(QtCore.Qt.Widget)
+        flags = self.windowFlags()
+        flags &= ~Qt.WindowMaximizeButtonHint
+        self.setWindowFlags(flags)
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground, False)
         self.show()
 

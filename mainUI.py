@@ -1,4 +1,5 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QVBoxLayout
 
 import gui.main.res  # noqa
@@ -19,8 +20,12 @@ class MainUI(QtWidgets.QWidget):
     def setupUi(self):
         self.window.switch_to_framed()
         self.widget = QtWidgets.QWidget(self.window)
-        self.widget.setGeometry(QtCore.QRect(0, 0, 1121, 761))
+        # self.widget.setGeometry(QtCore.QRect(0, 0, 1121, 761))
+        self.widget.setFixedSize(1121, 761)
         self.widget.setObjectName('widget')
+        # flags = self.window.windowFlags()
+        # flags &= ~Qt.WindowMaximizeButtonHint
+        # self.window.setWindowFlags(flags)
         self.layout = QVBoxLayout(self.widget)
         self.widget_2 = QtWidgets.QWidget(self.widget)
         self.widget_2.setGeometry(QtCore.QRect(0, 0, 1121, 761))
@@ -61,16 +66,16 @@ class MainUI(QtWidgets.QWidget):
         self.logoutButton.setStyleSheet(
             "QPushButton#logoutButton{\n"
             "    border-image: none;\n"
-            "    background-color: qlineargradient(spread:pad,x1:0,"
-            " y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20, 47, 78, 219),"
-            " stop:1 rgba(30, 57, 88, 219));\n"
+            "background-color: qconicalgradient(cx:0.5, cy:0.5, angle:45,"
+            "stop:0 rgba(85, 98, 112, 226), stop:0.5 rgba(20, 47, 78, 219),"
+            "stop:1 rgba(85, 98, 112, 226));"
             "    color: rgba(255, 55, 55, 210);\n"
             "    border-radius: 5px;    \n"
             "}\n"
             "QPushButton#logoutButton:hover{\n"
-            "    background-color: qlineargradient(spread:pad,x1:0,"
-            " y1:0.505682, x2:1, y2:0.477, stop:0 rgba(40, 67, 98, 219),"
-            " stop:1 rgba(50, 77, 108, 219));\n"
+            "    background-color: qconicalgradient(cx:0.5, cy:0.5, angle:45,"
+            "stop:0 rgba(105, 118, 132, 226), stop:0.5 rgba(40, 67, 98, 219),"
+            "stop:1 rgba(105, 118, 132, 226));"
             "}\n"
             "QPushButton#logoutButton:pressed{\n"
             "    padding-left:5px;\n"
@@ -81,15 +86,15 @@ class MainUI(QtWidgets.QWidget):
         )
         button_style = """
             {\nborder-image: none;\n
-            background-color: qlineargradient(spread:pad,x1:0,
-            y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20, 47, 78, 219),
-            stop:1 rgba(85, 98, 112, 226));\n
+            background-color: qconicalgradient(cx:0.5, cy:0.5, angle:45,
+            stop:0 rgba(85, 98, 112, 226), stop:0.5 rgba(20, 47, 78, 219),
+            stop:1 rgba(85, 98, 112, 226));
             color: rgba(255, 255, 255, 210);\n
             border-radius: 5px;\n}\n
         """
         hover_style = """
-            {\nbackground-color: qlineargradient(spread:pad,x1:0,
-            y1:0.505682, x2:1, y2:0.477, stop:0 rgba(40, 67, 98, 219),
+            {\nbackground-color: qconicalgradient(cx:0.5, cy:0.5, angle:45,
+            stop:0 rgba(105, 118, 132, 226), stop:0.5 rgba(40, 67, 98, 219),
             stop:1 rgba(105, 118, 132, 226));\n}\n
         """
         pressed_style = """
