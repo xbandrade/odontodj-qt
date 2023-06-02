@@ -1,10 +1,10 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QVBoxLayout
 
 import gui.main.res  # noqa
 from historyUI import HistoryUI
 from navigator import navigate_to_login_page
+from scheduleUI import ScheduleUI
 from window import CustomNewWindow
 
 
@@ -20,12 +20,8 @@ class MainUI(QtWidgets.QWidget):
     def setupUi(self):
         self.window.switch_to_framed()
         self.widget = QtWidgets.QWidget(self.window)
-        # self.widget.setGeometry(QtCore.QRect(0, 0, 1121, 761))
         self.widget.setFixedSize(1121, 761)
         self.widget.setObjectName('widget')
-        # flags = self.window.windowFlags()
-        # flags &= ~Qt.WindowMaximizeButtonHint
-        # self.window.setWindowFlags(flags)
         self.layout = QVBoxLayout(self.widget)
         self.widget_2 = QtWidgets.QWidget(self.widget)
         self.widget_2.setGeometry(QtCore.QRect(0, 0, 1121, 761))
@@ -53,17 +49,17 @@ class MainUI(QtWidgets.QWidget):
         )
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName('label_2')
-        self.logoutButton = QtWidgets.QPushButton(self.widget_2)
-        self.logoutButton.setGeometry(QtCore.QRect(970, 20, 131, 51))
+        self.logout_button = QtWidgets.QPushButton(self.widget_2)
+        self.logout_button.setGeometry(QtCore.QRect(970, 20, 131, 51))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
         font.setWeight(75)
-        self.logoutButton.setFont(font)
-        self.logoutButton.setCursor(
+        self.logout_button.setFont(font)
+        self.logout_button.setCursor(
             QtGui.QCursor(QtCore.Qt.PointingHandCursor)
         )
-        self.logoutButton.setStyleSheet(
+        self.logout_button.setStyleSheet(
             "QPushButton#logoutButton{\n"
             "    border-image: none;\n"
             "background-color: qconicalgradient(cx:0.5, cy:0.5, angle:45,"
@@ -102,7 +98,7 @@ class MainUI(QtWidgets.QWidget):
             padding-top:5px;\n
             background-color: rgba(105, 118, 132, 200);\n}\n
         """
-        self.logoutButton.setObjectName('logoutButton')
+        self.logout_button.setObjectName('logoutButton')
         self.calendarWidget = QtWidgets.QCalendarWidget(self.widget_2)
         self.calendarWidget.setGeometry(QtCore.QRect(470, 130, 631, 601))
         self.calendarWidget.setStyleSheet(
@@ -257,30 +253,29 @@ class MainUI(QtWidgets.QWidget):
             "QPushButton#sendResultsButton:pressed" + pressed_style
         )
         self.sendResultsButton.setObjectName("sendResultsButton")
-        self.updateProceduresButton = QtWidgets.QPushButton(self.widget_2)
-        self.updateProceduresButton.setGeometry(
+        self.update_button = QtWidgets.QPushButton(self.widget_2)
+        self.update_button.setGeometry(
             QtCore.QRect(10, 630, 211, 101)
         )
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
         font.setWeight(75)
-        self.updateProceduresButton.setFont(font)
-        self.updateProceduresButton.setCursor(
+        self.update_button.setFont(font)
+        self.update_button.setCursor(
             QtGui.QCursor(QtCore.Qt.PointingHandCursor)
         )
-        self.updateProceduresButton.setStyleSheet(
+        self.update_button.setStyleSheet(
             "QPushButton#updateProceduresButton" + button_style +
             "QPushButton#updateProceduresButton:hover" + hover_style +
             "QPushButton#updateProceduresButton:pressed" + pressed_style
         )
-        self.updateProceduresButton.setObjectName("updateProceduresButton")
-        # self.add_widgets_to_layout()
-        # self.widget.setLayout(self.layout)
+        self.update_button.setObjectName("updateProceduresButton")
         self.retranslateUi()
         QtCore.QMetaObject.connectSlotsByName(self.window)
         self.patient_history_button.clicked.connect(self.on_history_click)
-        self.logoutButton.clicked.connect(self.on_logout)
+        self.schedule_button.clicked.connect(self.on_schedule_click)
+        self.logout_button.clicked.connect(self.on_logout)
 
     def on_logout(self):
         navigate_to_login_page(self.window)
@@ -288,14 +283,20 @@ class MainUI(QtWidgets.QWidget):
     def on_history_click(self):
         new_window = CustomNewWindow()
         history_ui = HistoryUI(new_window, self)
-        new_window.setCentralWidget(history_ui.widget)
+        new_window.setCentralWidget(history_ui.centralwidget)
+        new_window.show()
+
+    def on_schedule_click(self):
+        new_window = CustomNewWindow()
+        schedule_ui = ScheduleUI(new_window, self)
+        new_window.setCentralWidget(schedule_ui.centralwidget)
         new_window.show()
 
     def add_widgets_to_layout(self):
         self.layout.addWidget(self.widget_2)
         self.layout.addWidget(self.label)
         self.layout.addWidget(self.label_2)
-        self.layout.addWidget(self.logoutButton)
+        self.layout.addWidget(self.logout_button)
         self.layout.addWidget(self.calendarWidget)
         self.layout.addWidget(self.schedule_button)
         self.layout.addWidget(self.updateScheduleButton)
@@ -306,7 +307,7 @@ class MainUI(QtWidgets.QWidget):
         self.layout.addWidget(self.patient_history_button)
         self.layout.addWidget(self.availableTimesButton)
         self.layout.addWidget(self.sendResultsButton)
-        self.layout.addWidget(self.updateProceduresButton)
+        self.layout.addWidget(self.update_button)
 
     def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
@@ -314,7 +315,7 @@ class MainUI(QtWidgets.QWidget):
         self.label_2.setText(_translate(
             'Form', f"You're logged in as {self.username}"
         ))
-        self.logoutButton.setText(_translate(
+        self.logout_button.setText(_translate(
             'Form', 'Logout'
         ))
         self.schedule_button.setText(_translate(
@@ -344,6 +345,6 @@ class MainUI(QtWidgets.QWidget):
         self.sendResultsButton.setText(_translate(
             'Form', 'Send Procedure Results'
         ))
-        self.updateProceduresButton.setText(_translate(
+        self.update_button.setText(_translate(
             'Form', 'Update Procedures'
         ))

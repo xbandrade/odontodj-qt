@@ -1,7 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 import gui.login.res  # noqa
-from api_connect import jwt_login
+from api_connect import VerificationThread
 from navigator import navigate_to_main_app
 
 
@@ -48,8 +48,8 @@ class LoginUI(QtWidgets.QWidget):
             color: rgba(255, 255, 255, 230);\n
             padding-bottom: 7px;
         """
-        self.user_line_edit = QtWidgets.QLineEdit(self.widget)
-        self.user_line_edit.setGeometry(QtCore.QRect(390, 290, 251, 61))
+        self.user_input = QtWidgets.QLineEdit(self.widget)
+        self.user_input.setGeometry(QtCore.QRect(390, 290, 251, 61))
         font = QtGui.QFont()
         font.setFamily('Sans Serif Collection')
         font.setPointSize(10)
@@ -64,25 +64,25 @@ class LoginUI(QtWidgets.QWidget):
         font.setPointSize(14)
         font.setBold(True)
         font.setWeight(75)
-        self.user_line_edit.setFont(font)
-        self.user_line_edit.setFocusPolicy(QtCore.Qt.StrongFocus)
-        self.user_line_edit.setStyleSheet(self.line_edit_style)
-        self.user_line_edit.setText('')
-        self.user_line_edit.setAlignment(QtCore.Qt.AlignCenter)
-        self.user_line_edit.setObjectName('lineEdit')
-        self.password_line_edit = QtWidgets.QLineEdit(self.widget)
-        self.password_line_edit.setGeometry(QtCore.QRect(390, 410, 251, 61))
+        self.user_input.setFont(font)
+        self.user_input.setFocusPolicy(QtCore.Qt.StrongFocus)
+        self.user_input.setStyleSheet(self.line_edit_style)
+        self.user_input.setText('')
+        self.user_input.setAlignment(QtCore.Qt.AlignCenter)
+        self.user_input.setObjectName('lineEdit')
+        self.password_input = QtWidgets.QLineEdit(self.widget)
+        self.password_input.setGeometry(QtCore.QRect(390, 410, 251, 61))
         font = QtGui.QFont()
         font.setPointSize(14)
         font.setBold(True)
         font.setWeight(75)
-        self.password_line_edit.setFont(font)
-        self.password_line_edit.setFocusPolicy(QtCore.Qt.StrongFocus)
-        self.password_line_edit.setStyleSheet(self.line_edit_style)
-        self.password_line_edit.setText('')
-        self.password_line_edit.setAlignment(QtCore.Qt.AlignCenter)
-        self.password_line_edit.setObjectName('lineEdit_2')
-        self.password_line_edit.setEchoMode(QtWidgets.QLineEdit.Password)
+        self.password_input.setFont(font)
+        self.password_input.setFocusPolicy(QtCore.Qt.StrongFocus)
+        self.password_input.setStyleSheet(self.line_edit_style)
+        self.password_input.setText('')
+        self.password_input.setAlignment(QtCore.Qt.AlignCenter)
+        self.password_input.setObjectName('lineEdit_2')
+        self.password_input.setEchoMode(QtWidgets.QLineEdit.Password)
         self.login_button = QtWidgets.QPushButton(self.widget)
         self.login_button.setGeometry(QtCore.QRect(420, 510, 191, 51))
         font = QtGui.QFont()
@@ -99,16 +99,16 @@ class LoginUI(QtWidgets.QWidget):
         )
         self.login_button.setStyleSheet(
             "QPushButton#pushButton{\n"
-            "    background-color: qlineargradient(spread:pad,x1:0, "
-            "y1:0.505682, x2:1, y2:0.477, stop:0 rgba(20, 47, 78, 219), "
-            "stop:1 rgba(85, 98, 112, 226));\n"
+            "background-color: qconicalgradient(cx:0.5, cy:0.5, angle:45,"
+            "stop:0 rgba(85, 98, 112, 226), stop:0.5 rgba(20, 47, 78, 219),"
+            "stop:1 rgba(85, 98, 112, 226));"
             "    color: rgba(255, 255, 255, 210);\n"
             "    border-radius: 5px;    \n"
             "}\n"
             "QPushButton#pushButton:hover{    \n"
-            "    background-color: qlineargradient(spread:pad,x1:0, "
-            "y1:0.505682, x2:1, y2:0.477, stop:0 rgba(40, 67, 98, 219),"
-            " stop:1 rgba(105, 118, 132, 226));\n"
+            "    background-color: qconicalgradient(cx:0.5, cy:0.5, angle:45,"
+            "stop:0 rgba(105, 118, 132, 226), stop:0.5 rgba(40, 67, 98, 219),"
+            "stop:1 rgba(105, 118, 132, 226));"
             "}\n"
             "QPushButton#pushButton:pressed{\n"
             "    padding-left:5px;\n"
@@ -118,23 +118,23 @@ class LoginUI(QtWidgets.QWidget):
             ""
         )
         self.login_button.setObjectName('pushButton')
-        self.label_5 = QtWidgets.QLabel(self.widget)
-        self.label_5.setGeometry(QtCore.QRect(30, 30, 991, 631))
-        self.label_5.setStyleSheet(
+        self.bg_cover = QtWidgets.QLabel(self.widget)
+        self.bg_cover.setGeometry(QtCore.QRect(30, 30, 991, 631))
+        self.bg_cover.setStyleSheet(
             "border-radius: 20px;\n"
-            "background-color: rgba(0, 0, 0, 30);"
+            "background-color: rgba(0, 0, 0, 40);"
         )
-        self.label_5.setText('')
-        self.label_5.setObjectName('label_5')
-        self.label_6 = QtWidgets.QLabel(self.widget)
-        self.label_6.setGeometry(QtCore.QRect(30, 30, 991, 631))
-        self.label_6.setStyleSheet(
+        self.bg_cover.setText('')
+        self.bg_cover.setObjectName('label_5')
+        self.bg_widget = QtWidgets.QLabel(self.widget)
+        self.bg_widget.setGeometry(QtCore.QRect(30, 30, 991, 631))
+        self.bg_widget.setStyleSheet(
             "border-radius: 20px;\n"
             "border-image: url(:/img/images/bg.png);\n"
             "background-color: rgba(0, 0, 0, 120);"
         )
-        self.label_6.setText("")
-        self.label_6.setObjectName("label_6")
+        self.bg_widget.setText("")
+        self.bg_widget.setObjectName("label_6")
         self.closeButton = QtWidgets.QPushButton(self.widget)
         self.closeButton.setGeometry(QtCore.QRect(980, 40, 31, 31))
         self.closeButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
@@ -162,13 +162,13 @@ class LoginUI(QtWidgets.QWidget):
         )
         self.minimizeButton.setText('')
         self.minimizeButton.setObjectName('minimizeButton')
-        self.label_6.raise_()
-        self.label_5.raise_()
+        self.bg_widget.raise_()
+        self.bg_cover.raise_()
         self.label_2.raise_()
         self.label_3.raise_()
         self.label_4.raise_()
-        self.user_line_edit.raise_()
-        self.password_line_edit.raise_()
+        self.user_input.raise_()
+        self.password_input.raise_()
         self.warning_label.raise_()
         self.login_button.raise_()
         self.closeButton.raise_()
@@ -192,56 +192,82 @@ class LoginUI(QtWidgets.QWidget):
         self.window.showMinimized()
 
     def on_login_clicked(self):
-        username = self.user_line_edit.text()
-        password = self.password_line_edit.text()
+        username = self.user_input.text()
+        password = self.password_input.text()
+        self.set_widgets_enabled(False)
+        print('Logging in...')
+        self.warning_label.setText('Logging in...')
+        self.warning_label.setStyleSheet("color: rgba(220, 0, 0, 200);")
+        self.user_input.setStyleSheet(self.line_edit_style)
+        self.password_input.setStyleSheet(self.line_edit_style)
         if not username or not password:
             self.warning_label.setText('Enter your credentials')
             print('Username and password cannot be empty')
-            self.user_line_edit.setStyleSheet(
+            self.user_input.setStyleSheet(
                 self.line_edit_style +
                 "background-color: rgba(255, 0, 0, 50);"
             )
-            self.password_line_edit.setStyleSheet(
+            self.password_input.setStyleSheet(
                 self.line_edit_style +
                 "background-color: rgba(255, 0, 0, 50);"
             )
-            self.user_line_edit.setToolTip(
+            self.user_input.setToolTip(
                 'Username and password cannot be empty'
             )
         else:
-            self.login_user(username, password)
+            self.verification_thread = VerificationThread(
+                {'username': username, 'password': password},
+                self.url,
+            )
+            self.verification_thread.finished.connect(
+                self.on_verification_finished
+            )
+            self.verification_thread.start()
 
-    def login_user(self, username, password):
-        access_token = jwt_login(self.url, username, password)
+    def on_verification_finished(self, access_token):
+        self.set_widgets_enabled(True)
+        self.login_user(access_token)
+
+    def login_user(self, access_token):
         if access_token:
             print('Login Successful!')
-            navigate_to_main_app(self.window, username, self.url, access_token)
-            self.warning_label.setStyleSheet("color: rgba(0, 255, 0, 200);")
+            navigate_to_main_app(
+                self.window,
+                self.user_input.text(),
+                self.url,
+                access_token
+            )
             self.warning_label.setText('Login Successful')
+            self.warning_label.setStyleSheet("color: rgba(0, 255, 0, 200);")
         else:
             self.warning_label.setText('Invalid Credentials')
+            self.warning_label.setStyleSheet("color: rgba(255, 0, 0, 200);")
             print('Incorrect username or password')
-            self.user_line_edit.setStyleSheet(
+            self.user_input.setStyleSheet(
                 self.line_edit_style +
                 "background-color: rgba(255, 0, 0, 50);"
             )
-            self.password_line_edit.setStyleSheet(
+            self.password_input.setStyleSheet(
                 self.line_edit_style +
                 "background-color: rgba(255, 0, 0, 50);"
             )
-            # self.password_line_edit.setStyleSheet('background-color: red;')
-            self.user_line_edit.setToolTip(
+            self.user_input.setToolTip(
                 'Incorrect username or password'
             )
+
+    def set_widgets_enabled(self, enabled):
+        self.user_input.setEnabled(enabled)
+        self.password_input.setEnabled(enabled)
+        self.login_button.setEnabled(enabled)
 
     def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
         self.window.setWindowTitle(_translate("Form", "OdontoDj"))
         self.label_4.setText(_translate("Form", "Login"))
-        self.user_line_edit.setPlaceholderText(
+        self.user_input.setPlaceholderText(
             _translate("Form", "Username")
         )
-        self.password_line_edit.setPlaceholderText(
+        self.password_input.setPlaceholderText(
             _translate("Form", "Password")
         )
         self.login_button.setText(_translate("Form", "L o g i n"))

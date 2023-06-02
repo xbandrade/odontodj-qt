@@ -1,14 +1,20 @@
 import requests
+from PyQt5.QtCore import QThread, pyqtSignal
 
 
-def jwt_login(url, username, password):
-    token_url = url + '/users/api/token/'
-    credentials = {
-        'username': username,
-        'password': password
-    }
-    response = requests.post(token_url, json=credentials)
-    return response.json()['access'] if response.status_code == 200 else None
+class VerificationThread(QThread):
+    finished = pyqtSignal(str)
+
+    def __init__(self, credentials, url):
+        super().__init__()
+        self.credentials = credentials
+        self.url = url
+
+    def run(self):
+        token_url = self.url + '/users/api/token/'
+        response = requests.post(token_url, json=self.credentials)
+        access_token = response.json().get('access', '') if response.ok else ''
+        self.finished.emit(access_token)
 
 
 def retrieve_appointments(url, access_token):
