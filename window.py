@@ -36,13 +36,14 @@ class CustomMainWindow(QMainWindow):
             self.mouseMovePos = None
         super().mouseReleaseEvent(event)
 
-    def switch_to_framed(self):
+    def switch_to_framed(self, show=True):
         self.setWindowFlags(QtCore.Qt.Widget)
         flags = self.windowFlags()
         flags &= ~Qt.WindowMaximizeButtonHint
         self.setWindowFlags(flags)
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground, False)
-        self.show()
+        if show:
+            self.show()
 
     def switch_to_frameless(self):
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)

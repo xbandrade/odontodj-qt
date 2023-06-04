@@ -2,9 +2,13 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QVBoxLayout
 
 import gui.main.res  # noqa
-from historyUI import HistoryUI
+from gui.add_patientUI import AddPatientUI
+from gui.datetimesUI import DateTimesUI
+from gui.historyUI import HistoryUI
+from gui.scheduleUI import ScheduleUI
+from gui.update_patientUI import UpdatePatientUI
+from gui.update_procedureUI import UpdateProcedureUI
 from navigator import navigate_to_login_page
-from scheduleUI import ScheduleUI
 from window import CustomNewWindow
 
 
@@ -121,88 +125,91 @@ class MainUI(QtWidgets.QWidget):
             "QPushButton#scheduleButton:pressed" + pressed_style
         )
         self.schedule_button.setObjectName('scheduleButton')
-        self.updateScheduleButton = QtWidgets.QPushButton(self.widget_2)
-        self.updateScheduleButton.setGeometry(QtCore.QRect(10, 270, 211, 101))
+        self.update_appointment_button = QtWidgets.QPushButton(self.widget_2)
+        self.update_appointment_button.setGeometry(
+            QtCore.QRect(10, 270, 211, 101))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
         font.setWeight(75)
-        self.updateScheduleButton.setFont(font)
-        self.updateScheduleButton.setCursor(
+        self.update_appointment_button.setFont(font)
+        self.update_appointment_button.setCursor(
             QtGui.QCursor(QtCore.Qt.PointingHandCursor)
         )
-        self.updateScheduleButton.setStyleSheet(
+        self.update_appointment_button.setStyleSheet(
             "QPushButton#updateScheduleButton" + button_style +
             "QPushButton#updateScheduleButton:hover" + hover_style +
             "QPushButton#updateScheduleButton:pressed" + pressed_style
         )
-        self.updateScheduleButton.setObjectName('updateScheduleButton')
-        self.customScheduleButton = QtWidgets.QPushButton(self.widget_2)
-        self.customScheduleButton.setGeometry(QtCore.QRect(10, 390, 211, 101))
+        self.update_appointment_button.setObjectName('updateScheduleButton')
+        self.custom_schedule_button = QtWidgets.QPushButton(self.widget_2)
+        self.custom_schedule_button.setGeometry(
+            QtCore.QRect(10, 390, 211, 101))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
         font.setWeight(75)
-        self.customScheduleButton.setFont(font)
-        self.customScheduleButton.setCursor(
+        self.custom_schedule_button.setFont(font)
+        self.custom_schedule_button.setCursor(
             QtGui.QCursor(QtCore.Qt.PointingHandCursor)
         )
-        self.customScheduleButton.setStyleSheet(
+        self.custom_schedule_button.setStyleSheet(
             "QPushButton#customScheduleButton" + button_style +
             "QPushButton#customScheduleButton:hover" + hover_style +
             "QPushButton#customScheduleButton:pressed" + pressed_style
         )
-        self.customScheduleButton.setObjectName('customScheduleButton')
-        self.nextAppointmentsButton = QtWidgets.QPushButton(self.widget_2)
-        self.nextAppointmentsButton.setGeometry(
+        self.custom_schedule_button.setObjectName('customScheduleButton')
+        self.next_appointments_button = QtWidgets.QPushButton(self.widget_2)
+        self.next_appointments_button.setGeometry(
             QtCore.QRect(10, 510, 211, 101)
         )
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
         font.setWeight(75)
-        self.nextAppointmentsButton.setFont(font)
-        self.nextAppointmentsButton.setCursor(
+        self.next_appointments_button.setFont(font)
+        self.next_appointments_button.setCursor(
             QtGui.QCursor(QtCore.Qt.PointingHandCursor)
         )
-        self.nextAppointmentsButton.setStyleSheet(
+        self.next_appointments_button.setStyleSheet(
             "QPushButton#nextAppointmentsButton" + button_style +
             "QPushButton#nextAppointmentsButton:hover" + hover_style +
             "QPushButton#nextAppointmentsButton:pressed" + pressed_style
         )
-        self.nextAppointmentsButton.setObjectName('nextAppointmentsButton')
-        self.patientDetailsButton = QtWidgets.QPushButton(self.widget_2)
-        self.patientDetailsButton.setGeometry(QtCore.QRect(240, 270, 211, 101))
+        self.next_appointments_button.setObjectName('nextAppointmentsButton')
+        self.update_patient_button = QtWidgets.QPushButton(self.widget_2)
+        self.update_patient_button.setGeometry(
+            QtCore.QRect(240, 270, 211, 101))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
         font.setWeight(75)
-        self.patientDetailsButton.setFont(font)
-        self.patientDetailsButton.setCursor(
+        self.update_patient_button.setFont(font)
+        self.update_patient_button.setCursor(
             QtGui.QCursor(QtCore.Qt.PointingHandCursor)
         )
-        self.patientDetailsButton.setStyleSheet(
+        self.update_patient_button.setStyleSheet(
             "QPushButton#patientDetailsButton" + button_style +
             "QPushButton#patientDetailsButton:hover" + hover_style +
             "QPushButton#patientDetailsButton:pressed" + pressed_style
         )
-        self.patientDetailsButton.setObjectName("patientDetailsButton")
-        self.addPatientButton = QtWidgets.QPushButton(self.widget_2)
-        self.addPatientButton.setGeometry(QtCore.QRect(240, 150, 211, 101))
+        self.update_patient_button.setObjectName("patientDetailsButton")
+        self.add_patient_button = QtWidgets.QPushButton(self.widget_2)
+        self.add_patient_button.setGeometry(QtCore.QRect(240, 150, 211, 101))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
         font.setWeight(75)
-        self.addPatientButton.setFont(font)
-        self.addPatientButton.setCursor(
+        self.add_patient_button.setFont(font)
+        self.add_patient_button.setCursor(
             QtGui.QCursor(QtCore.Qt.PointingHandCursor)
         )
-        self.addPatientButton.setStyleSheet(
+        self.add_patient_button.setStyleSheet(
             "QPushButton#addPatientButton" + button_style +
             "QPushButton#addPatientButton:hover" + hover_style +
             "QPushButton#addPatientButton:pressed" + pressed_style
         )
-        self.addPatientButton.setObjectName("addPatientButton")
+        self.add_patient_button.setObjectName("addPatientButton")
         self.patient_history_button = QtWidgets.QPushButton(self.widget_2)
         self.patient_history_button.setGeometry(
             QtCore.QRect(240, 390, 211, 101)
@@ -221,61 +228,71 @@ class MainUI(QtWidgets.QWidget):
             "QPushButton#patientHistoryButton:pressed" + pressed_style
         )
         self.patient_history_button.setObjectName("patientHistoryButton")
-        self.availableTimesButton = QtWidgets.QPushButton(self.widget_2)
-        self.availableTimesButton.setGeometry(QtCore.QRect(240, 510, 211, 101))
+        self.available_times_button = QtWidgets.QPushButton(self.widget_2)
+        self.available_times_button.setGeometry(
+            QtCore.QRect(240, 510, 211, 101))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
         font.setWeight(75)
-        self.availableTimesButton.setFont(font)
-        self.availableTimesButton.setCursor(
+        self.available_times_button.setFont(font)
+        self.available_times_button.setCursor(
             QtGui.QCursor(QtCore.Qt.PointingHandCursor)
         )
-        self.availableTimesButton.setStyleSheet(
+        self.available_times_button.setStyleSheet(
             "QPushButton#availableTimesButton" + button_style +
             "QPushButton#availableTimesButton:hover" + hover_style +
             "QPushButton#availableTimesButton:pressed" + pressed_style
         )
-        self.availableTimesButton.setObjectName("availableTimesButton")
-        self.sendResultsButton = QtWidgets.QPushButton(self.widget_2)
-        self.sendResultsButton.setGeometry(QtCore.QRect(240, 630, 211, 101))
+        self.available_times_button.setObjectName("availableTimesButton")
+        self.send_results_button = QtWidgets.QPushButton(self.widget_2)
+        self.send_results_button.setGeometry(QtCore.QRect(240, 630, 211, 101))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
         font.setWeight(75)
-        self.sendResultsButton.setFont(font)
-        self.sendResultsButton.setCursor(
+        self.send_results_button.setFont(font)
+        self.send_results_button.setCursor(
             QtGui.QCursor(QtCore.Qt.PointingHandCursor)
         )
-        self.sendResultsButton.setStyleSheet(
+        self.send_results_button.setStyleSheet(
             "QPushButton#sendResultsButton" + button_style +
             "QPushButton#sendResultsButton:hover" + hover_style +
             "QPushButton#sendResultsButton:pressed" + pressed_style
         )
-        self.sendResultsButton.setObjectName("sendResultsButton")
-        self.update_button = QtWidgets.QPushButton(self.widget_2)
-        self.update_button.setGeometry(
-            QtCore.QRect(10, 630, 211, 101)
-        )
+        self.send_results_button.setObjectName("sendResultsButton")
+        self.update_procedure_button = QtWidgets.QPushButton(self.widget_2)
+        self.update_procedure_button.setGeometry(
+            QtCore.QRect(10, 630, 211, 101))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
         font.setWeight(75)
-        self.update_button.setFont(font)
-        self.update_button.setCursor(
-            QtGui.QCursor(QtCore.Qt.PointingHandCursor)
-        )
-        self.update_button.setStyleSheet(
+        self.update_procedure_button.setFont(font)
+        self.update_procedure_button.setCursor(
+            QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.update_procedure_button.setStyleSheet(
             "QPushButton#updateProceduresButton" + button_style +
             "QPushButton#updateProceduresButton:hover" + hover_style +
             "QPushButton#updateProceduresButton:pressed" + pressed_style
         )
-        self.update_button.setObjectName("updateProceduresButton")
+        self.update_procedure_button.setObjectName("updateProceduresButton")
         self.retranslateUi()
         QtCore.QMetaObject.connectSlotsByName(self.window)
         self.patient_history_button.clicked.connect(self.on_history_click)
         self.schedule_button.clicked.connect(self.on_schedule_click)
+        self.add_patient_button.clicked.connect(self.on_add_patient_click)
+        self.update_patient_button.clicked.connect(
+            self.on_update_patient_click)
         self.logout_button.clicked.connect(self.on_logout)
+        self.update_procedure_button.clicked.connect(
+            self.on_update_procedure_click)
+        self.available_times_button.clicked.connect(
+            self.on_available_times_click)
+        self.send_results_button.setEnabled(False)
+        self.update_appointment_button.setEnabled(False)
+        self.custom_schedule_button.setEnabled(False)
+        self.next_appointments_button.setEnabled(False)
 
     def on_logout(self):
         navigate_to_login_page(self.window)
@@ -286,65 +303,60 @@ class MainUI(QtWidgets.QWidget):
         new_window.setCentralWidget(history_ui.centralwidget)
         new_window.show()
 
+    def on_add_patient_click(self):
+        new_window = CustomNewWindow()
+        add_patient_ui = AddPatientUI(new_window, self)
+        new_window.setCentralWidget(add_patient_ui.centralwidget)
+        new_window.show()
+
+    def on_update_patient_click(self):
+        new_window = CustomNewWindow()
+        update_patient_ui = UpdatePatientUI(new_window, self)
+        new_window.setCentralWidget(update_patient_ui.centralwidget)
+        new_window.show()
+
+    def on_update_procedure_click(self):
+        new_window = CustomNewWindow()
+        update_procedure_ui = UpdateProcedureUI(new_window, self)
+        new_window.setCentralWidget(update_procedure_ui.centralwidget)
+        new_window.show()
+
     def on_schedule_click(self):
         new_window = CustomNewWindow()
         schedule_ui = ScheduleUI(new_window, self)
         new_window.setCentralWidget(schedule_ui.centralwidget)
         new_window.show()
 
-    def add_widgets_to_layout(self):
-        self.layout.addWidget(self.widget_2)
-        self.layout.addWidget(self.label)
-        self.layout.addWidget(self.label_2)
-        self.layout.addWidget(self.logout_button)
-        self.layout.addWidget(self.calendarWidget)
-        self.layout.addWidget(self.schedule_button)
-        self.layout.addWidget(self.updateScheduleButton)
-        self.layout.addWidget(self.customScheduleButton)
-        self.layout.addWidget(self.nextAppointmentsButton)
-        self.layout.addWidget(self.patientDetailsButton)
-        self.layout.addWidget(self.addPatientButton)
-        self.layout.addWidget(self.patient_history_button)
-        self.layout.addWidget(self.availableTimesButton)
-        self.layout.addWidget(self.sendResultsButton)
-        self.layout.addWidget(self.update_button)
+    def on_available_times_click(self):
+        new_window = CustomNewWindow()
+        available_times_ui = DateTimesUI(new_window, self)
+        new_window.setCentralWidget(available_times_ui.centralwidget)
+        new_window.show()
 
     def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
         self.window.setWindowTitle(_translate('Form', 'OdontoDj'))
         self.label_2.setText(_translate(
-            'Form', f"You're logged in as {self.username}"
-        ))
+            'Form', f"You're logged in as {self.username}"))
         self.logout_button.setText(_translate(
-            'Form', 'Logout'
-        ))
+            'Form', 'Logout'))
         self.schedule_button.setText(_translate(
-            'Form', 'New Appointment'
-        ))
-        self.updateScheduleButton.setText(_translate(
-            'Form', 'Update Appointment'
-        ))
-        self.customScheduleButton.setText(_translate(
-            'Form', 'Custom Appointment'
-        ))
-        self.nextAppointmentsButton.setText(_translate(
-            'Form', 'Next Appointments'
-        ))
-        self.patientDetailsButton.setText(_translate(
-            'Form', 'Patient Details'
-        ))
-        self.addPatientButton.setText(_translate(
-            'Form', 'Add New Patient'
-        ))
+            'Form', 'New Appointment'))
+        self.update_appointment_button.setText(_translate(
+            'Form', 'Update Appointment'))
+        self.custom_schedule_button.setText(_translate(
+            'Form', 'Custom Appointment'))
+        self.next_appointments_button.setText(_translate(
+            'Form', 'Next Appointments'))
+        self.update_patient_button.setText(_translate(
+            'Form', 'Patient Details'))
+        self.add_patient_button.setText(_translate(
+            'Form', 'Add New Patient'))
         self.patient_history_button.setText(_translate(
-            'Form', 'Patient History'
-        ))
-        self.availableTimesButton.setText(_translate(
-            'Form', 'Available Times'
-        ))
-        self.sendResultsButton.setText(_translate(
-            'Form', 'Send Procedure Results'
-        ))
-        self.update_button.setText(_translate(
-            'Form', 'Update Procedures'
-        ))
+            'Form', 'Patient History'))
+        self.available_times_button.setText(_translate(
+            'Form', 'Available Times'))
+        self.send_results_button.setText(_translate(
+            'Form', 'Send Procedure Results'))
+        self.update_procedure_button.setText(_translate(
+            'Form', 'Update Procedures'))

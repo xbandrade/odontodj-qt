@@ -1,7 +1,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 import gui.main.res  # noqa
-from api_connect import retrieve_datetimes, retrieve_procedures
+from api_connect import (retrieve_datetimes, retrieve_procedures,
+                         schedule_appointment)
 
 
 class CenteredDelegate(QtWidgets.QStyledItemDelegate):
@@ -23,7 +24,7 @@ class ScheduleUI(QtWidgets.QWidget):
         self.setupUi()
 
     def setupUi(self):
-        self.window.switch_to_framed()
+        self.window.switch_to_framed(show=False)
         self.window.setObjectName("MainWindow")
         sizePolicy = QtWidgets.QSizePolicy(
             QtWidgets.QSizePolicy.Expanding,
@@ -130,6 +131,9 @@ class ScheduleUI(QtWidgets.QWidget):
         delegate = CenteredDelegate(self.listView)
         self.listView.setItemDelegate(delegate)
         datetimes = retrieve_datetimes(self.url, self.access_token)
+        self.listView.setStyleSheet(
+            "background-color: rgba(195, 195, 195, 180);"
+        )
         items = datetimes[:20] or ["No Available Times"]
         initial_datetime = items[0].split()
         year, month, day = map(int, initial_datetime[0].split('-'))
@@ -138,7 +142,7 @@ class ScheduleUI(QtWidgets.QWidget):
         initial_time = QtCore.QTime(hour, minute, 0)
         model.setStringList(items)
         self.list_label = QtWidgets.QLabel(self.list_frame)
-        self.list_label.setGeometry(QtCore.QRect(160, 30, 311, 21))
+        self.list_label.setGeometry(QtCore.QRect(180, 30, 311, 21))
         font = QtGui.QFont()
         font.setPointSize(16)
         font.setBold(True)
@@ -220,10 +224,76 @@ class ScheduleUI(QtWidgets.QWidget):
         self.frame_7.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_7.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_7.setObjectName("frame_7")
+        self.schedule_button = QtWidgets.QPushButton(self.time_frame)
+        self.schedule_button.setObjectName("pushButton")
+        self.schedule_button.setGeometry(QtCore.QRect(240, 80, 211, 61))
+        button_style = """
+            {\nborder-image: none;\n
+            background-color: qconicalgradient(cx:0.5, cy:0.5, angle:45,
+            stop:0 rgba(85, 98, 112, 226), stop:0.5 rgba(20, 47, 78, 219),
+            stop:1 rgba(85, 98, 112, 226));
+            color: rgba(255, 255, 255, 210);\n
+            border-radius: 5px;\n}\n
+        """
+        hover_style = """
+            {\nbackground-color: qconicalgradient(cx:0.5, cy:0.5, angle:45,
+            stop:0 rgba(105, 118, 132, 226), stop:0.5 rgba(40, 67, 98, 219),
+            stop:1 rgba(105, 118, 132, 226));\n}\n
+        """
+        pressed_style = """
+            {\npadding-left:5px;\n
+            padding-top:5px;\n
+            background-color: rgba(105, 118, 132, 200);\n}\n
+        """
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.schedule_button.setFont(font)
+        self.schedule_button.setCursor(
+            QtGui.QCursor(QtCore.Qt.PointingHandCursor)
+        )
+        self.schedule_button.setStyleSheet(
+            "QPushButton#pushButton" + button_style +
+            "QPushButton#pushButton:hover" + hover_style +
+            "QPushButton#pushButton:pressed" + pressed_style
+        )
+        self.gridLayout.addWidget(self.time_frame, 3, 0, 1, 1)
         self.gridLayout.addWidget(self.frame_7, 4, 0, 1, 1)
         self.window.setCentralWidget(self.centralwidget)
         self.retranslateUi()
         QtCore.QMetaObject.connectSlotsByName(self.window)
+        self.schedule_button.clicked.connect(self.on_schedule_click)
+        self.window.show()
+
+    def on_schedule_click(self):
+        procedure = self.procedures.currentText()
+        date = self.date_input.date()
+        time = self.time_input.time()
+        date_str = date.toString("yyyy-MM-dd")
+        time_str = time.toString("hh:mm:ss")
+        message_box = QtWidgets.QMessageBox()
+        if procedure == '' or date == QtCore.QDate() or time == QtCore.QTime():
+            title, text = 'Error', 'Please fill in all fields'
+        elif schedule_appointment(self.url, self.access_token,
+                                  procedure, date_str, time_str):
+            title, text = 'Success', 'Appointment scheduled successfully'
+        else:
+            title, text = 'Error', 'Failed to schedule appointment'
+        message_box.setWindowTitle(title)
+        message_box.setText(text)
+        message_box.setFixedSize(150, 80)
+        message_box.setWindowModality(QtCore.Qt.ApplicationModal)
+        message_box.setStandardButtons(QtWidgets.QMessageBox.Ok)
+        message_box.setDefaultButton(QtWidgets.QMessageBox.Ok)
+        message_box.setIcon(QtWidgets.QMessageBox.Information)
+        message_box.setWindowIcon(QtGui.QIcon('img/od_logo.png'))
+        message_box.setWindowFlags(
+            message_box.windowFlags() &
+            ~QtCore.Qt.WindowCloseButtonHint
+        )
+        message_box.exec_()
+        self.centralwidget.show()
 
     def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
@@ -235,3 +305,4 @@ class ScheduleUI(QtWidgets.QWidget):
         ))
         self.date_label.setText(_translate("MainWindow", "Date"))
         self.time_label.setText(_translate("MainWindow", "Time"))
+        self.schedule_button.setText(_translate("MainWindow", "Schedule"))

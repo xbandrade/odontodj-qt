@@ -17,7 +17,7 @@ class HistoryUI(QtWidgets.QWidget):
         self.setupUi()
 
     def setupUi(self):
-        self.window.switch_to_framed()
+        self.window.switch_to_framed(show=False)
         self.centralwidget = QtWidgets.QWidget(self.window)
         self.centralwidget.setFixedSize(1120, 760)
         self.centralwidget.setObjectName('widget')
@@ -188,6 +188,7 @@ class HistoryUI(QtWidgets.QWidget):
             self.label_3.setText('No Appointments Found')
         self.retranslateUi()
         QtCore.QMetaObject.connectSlotsByName(self.window)
+        self.window.show()
 
     def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate

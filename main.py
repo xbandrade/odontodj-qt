@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QApplication
 
-from loginUI import LoginUI
+from gui.loginUI import LoginUI
 from window import CustomMainWindow
 
 
