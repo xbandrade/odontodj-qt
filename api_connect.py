@@ -23,4 +23,22 @@ def retrieve_appointments(url, access_token):
         'Authorization': 'Bearer ' + access_token
     }
     response = requests.get(appointments_url, headers=headers)
-    return response.json() if response.status_code == 200 else None
+    return response.json().get('results') if response.ok else None
+
+
+def retrieve_datetimes(url, access_token):
+    appointments_url = url + '/schedule/api/datetime/'
+    headers = {
+        'Authorization': 'Bearer ' + access_token
+    }
+    response = requests.get(appointments_url, headers=headers)
+    return response.json().get('available_datetimes') if response.ok else None
+
+
+def retrieve_procedures(url, access_token):
+    appointments_url = url + '/schedule/api/procedure/'
+    headers = {
+        'Authorization': 'Bearer ' + access_token
+    }
+    response = requests.get(appointments_url, headers=headers)
+    return response.json().get('results') if response.ok else None

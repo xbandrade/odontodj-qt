@@ -1,6 +1,16 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 import gui.main.res  # noqa
+from api_connect import retrieve_datetimes, retrieve_procedures
+
+
+class CenteredDelegate(QtWidgets.QStyledItemDelegate):
+    def initStyleOption(self, option, index):
+        super().initStyleOption(option, index)
+        option.displayAlignment = QtCore.Qt.AlignCenter
+
+    def createEditor(self, parent, option, index):
+        return None
 
 
 class ScheduleUI(QtWidgets.QWidget):
@@ -13,8 +23,8 @@ class ScheduleUI(QtWidgets.QWidget):
         self.setupUi()
 
     def setupUi(self):
+        self.window.switch_to_framed()
         self.window.setObjectName("MainWindow")
-        self.window.resize(1120, 760)
         sizePolicy = QtWidgets.QSizePolicy(
             QtWidgets.QSizePolicy.Expanding,
             QtWidgets.QSizePolicy.Expanding
@@ -29,6 +39,7 @@ class ScheduleUI(QtWidgets.QWidget):
             "border-image: url(:/newPrefix/images/app_bg.jpg);"
         )
         self.centralwidget = QtWidgets.QWidget(self.window)
+        self.centralwidget.setFixedSize(1120, 760)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
         self.gridLayout.setObjectName("gridLayout")
@@ -82,6 +93,10 @@ class ScheduleUI(QtWidgets.QWidget):
         self.procedures = QtWidgets.QComboBox(self.procedure_frame)
         self.procedures.setGeometry(QtCore.QRect(310, 80, 221, 41))
         self.procedures.setObjectName("procedures")
+        procedures = retrieve_procedures(self.url, self.access_token)
+        procedures = [procedure['name'] for procedure in procedures]
+        items = procedures or ['------']
+        self.procedures.addItems(items)
         self.procedure_label = QtWidgets.QLabel(self.procedure_frame)
         self.procedure_label.setGeometry(QtCore.QRect(170, 80, 141, 41))
         font = QtGui.QFont()
@@ -110,6 +125,18 @@ class ScheduleUI(QtWidgets.QWidget):
         self.listView = QtWidgets.QListView(self.list_frame)
         self.listView.setGeometry(QtCore.QRect(140, 70, 311, 421))
         self.listView.setObjectName("listView")
+        model = QtCore.QStringListModel()
+        self.listView.setModel(model)
+        delegate = CenteredDelegate(self.listView)
+        self.listView.setItemDelegate(delegate)
+        datetimes = retrieve_datetimes(self.url, self.access_token)
+        items = datetimes[:20] or ["No Available Times"]
+        initial_datetime = items[0].split()
+        year, month, day = map(int, initial_datetime[0].split('-'))
+        initial_date = QtCore.QDate(year, month, day)
+        hour, minute = map(int, initial_datetime[1].split(':'))
+        initial_time = QtCore.QTime(hour, minute, 0)
+        model.setStringList(items)
         self.list_label = QtWidgets.QLabel(self.list_frame)
         self.list_label.setGeometry(QtCore.QRect(160, 30, 311, 21))
         font = QtGui.QFont()
@@ -147,6 +174,7 @@ class ScheduleUI(QtWidgets.QWidget):
         self.date_input = QtWidgets.QDateEdit(self.date_frame)
         self.date_input.setGeometry(QtCore.QRect(310, 30, 221, 51))
         self.date_input.setObjectName("date_input")
+        self.date_input.setDate(initial_date)
         self.gridLayout.addWidget(self.date_frame, 2, 0, 1, 1)
         self.time_frame = QtWidgets.QFrame(self.centralwidget)
         sizePolicy = QtWidgets.QSizePolicy(
@@ -172,9 +200,10 @@ class ScheduleUI(QtWidgets.QWidget):
         self.time_label.setFont(font)
         self.time_label.setStyleSheet("color: rgba(255, 255, 255, 210);")
         self.time_label.setObjectName("time_label")
-        self.timeEdit = QtWidgets.QTimeEdit(self.time_frame)
-        self.timeEdit.setGeometry(QtCore.QRect(310, -10, 221, 51))
-        self.timeEdit.setObjectName("timeEdit")
+        self.time_input = QtWidgets.QTimeEdit(self.time_frame)
+        self.time_input.setGeometry(QtCore.QRect(310, -10, 221, 51))
+        self.time_input.setObjectName("timeEdit")
+        self.time_input.setTime(initial_time)
         self.gridLayout.addWidget(self.time_frame, 3, 0, 1, 1)
         self.frame_7 = QtWidgets.QFrame(self.centralwidget)
         sizePolicy = QtWidgets.QSizePolicy(
@@ -202,7 +231,7 @@ class ScheduleUI(QtWidgets.QWidget):
         self.title.setText(_translate("MainWindow", "Schedule Appointment"))
         self.procedure_label.setText(_translate("MainWindow", "Procedure"))
         self.list_label.setText(_translate(
-            "MainWindow", "Next Available Times"
+            "MainWindow", "Available Times"
         ))
         self.date_label.setText(_translate("MainWindow", "Date"))
         self.time_label.setText(_translate("MainWindow", "Time"))

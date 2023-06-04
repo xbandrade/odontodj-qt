@@ -24,7 +24,7 @@ class MainUI(QtWidgets.QWidget):
         self.widget.setObjectName('widget')
         self.layout = QVBoxLayout(self.widget)
         self.widget_2 = QtWidgets.QWidget(self.widget)
-        self.widget_2.setGeometry(QtCore.QRect(0, 0, 1121, 761))
+        self.widget_2.setGeometry(QtCore.QRect(0, 0, 1120, 760))
         self.widget_2.setStyleSheet(
             "border-image: url(:/newPrefix/images/app_bg.jpg);"
         )

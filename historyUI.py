@@ -17,11 +17,12 @@ class HistoryUI(QtWidgets.QWidget):
         self.setupUi()
 
     def setupUi(self):
+        self.window.switch_to_framed()
         self.centralwidget = QtWidgets.QWidget(self.window)
-        self.centralwidget.setFixedSize(1121, 761)
+        self.centralwidget.setFixedSize(1120, 760)
         self.centralwidget.setObjectName('widget')
         self.widget_2 = QtWidgets.QWidget(self.centralwidget)
-        self.widget_2.setGeometry(QtCore.QRect(0, 0, 1121, 761))
+        self.widget_2.setGeometry(QtCore.QRect(0, 0, 1120, 760))
         self.widget_2.setStyleSheet(
             "border-image: url(:/newPrefix/images/app_bg.jpg);"
         )
@@ -123,7 +124,8 @@ class HistoryUI(QtWidgets.QWidget):
             for appt in appointments:
                 data.append([
                     f'#0{appt.get("id")}', appt.get('procedure'),
-                    appt.get('date'), appt.get('time'), '---',  # price
+                    appt.get('date'), appt.get('time'),
+                    'R$' + str(appt.get('price', '')),
                     '✔️' if appt.get('is_confirmed') else '✖️',
                     '✔️' if appt.get('is_completed') else '✖️', '---',  # url
                 ])

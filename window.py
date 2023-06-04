@@ -11,7 +11,7 @@ class CustomMainWindow(QMainWindow):
         self.mousePressPos = None
         self.mouseMovePos = None
         self.setObjectName('OdontoDj')
-        self.resize(1118, 750)
+        self.resize(1120, 760)
         icon = QIcon('img/od_logo.png')
         self.setWindowIcon(icon)
 
