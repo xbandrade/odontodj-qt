@@ -1,6 +1,0 @@
-<RCC>
-  <qresource prefix="newPrefix">
-    <file>images/od_logo.png</file>
-    <file>images/app_bg.jpg</file>
-  </qresource>
-</RCC>
